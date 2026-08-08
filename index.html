@@ -1,809 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>Calcora Calculator – Free Online Calculator</title>
-<meta name="description" content="Calcora Calculator is a fast, modern and free online scientific calculator.">
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-font-family:Inter,Arial,sans-serif;
-min-height:100vh;
-color:#fff;
-background:
-radial-gradient(circle at 10% 0%,#26316b 0,transparent 30%),
-radial-gradient(circle at 90% 15%,#54206c 0,transparent 30%),
-#070912;
-}
-
-header{
-height:72px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 6%;
-border-bottom:1px solid rgba(255,255,255,.08);
-background:rgba(7,9,18,.7);
-backdrop-filter:blur(20px);
-}
-
-.logo{
-font-size:23px;
-font-weight:800;
-letter-spacing:-1px;
-}
-
-.logo span{
-color:#a875ff;
-}
-
-.header-btn{
-border:1px solid rgba(255,255,255,.1);
-background:#171b2d;
-color:#fff;
-padding:10px 15px;
-border-radius:12px;
-}
-
-main{
-max-width:1100px;
-margin:auto;
-padding:40px 16px 70px;
-}
-
-.hero{
-text-align:center;
-margin-bottom:30px;
-}
-
-.badge{
-display:inline-block;
-padding:8px 14px;
-border-radius:30px;
-background:rgba(139,92,246,.12);
-border:1px solid rgba(139,92,246,.3);
-color:#cdb5ff;
-font-size:13px;
-margin-bottom:15px;
-}
-
-.hero h1{
-font-size:clamp(40px,8vw,68px);
-line-height:1;
-margin-bottom:15px;
-}
-
-.gradient{
-background:linear-gradient(90deg,#fff,#a875ff);
--webkit-background-clip:text;
-color:transparent;
-}
-
-.hero p{
-color:#969db3;
-max-width:600px;
-margin:auto;
-line-height:1.6;
-}
-
-.calculator-wrap{
-max-width:600px;
-margin:auto;
-}
-
-.calculator{
-padding:15px;
-border-radius:30px;
-background:
-linear-gradient(145deg,rgba(30,35,58,.96),rgba(11,14,27,.98));
-border:1px solid rgba(255,255,255,.12);
-box-shadow:
-0 30px 100px rgba(0,0,0,.6),
-inset 0 1px rgba(255,255,255,.06);
-}
-
-.topbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:12px;
-}
-
-.mode{
-display:flex;
-gap:7px;
-}
-
-.mode button,
-.angle{
-border:1px solid rgba(255,255,255,.09);
-background:#151a2b;
-color:#aeb5c8;
-padding:9px 13px;
-border-radius:11px;
-cursor:pointer;
-}
-
-.mode .active{
-background:#7847e8;
-color:#fff;
-}
-
-.display{
-height:145px;
-border-radius:22px;
-padding:18px;
-margin-bottom:12px;
-background:
-linear-gradient(145deg,#080b16,#101528);
-border:1px solid rgba(255,255,255,.06);
-display:flex;
-flex-direction:column;
-justify-content:flex-end;
-text-align:right;
-box-shadow:inset 0 0 30px rgba(0,0,0,.3);
-}
-
-.expression{
-height:25px;
-color:#737b92;
-font-size:14px;
-overflow:hidden;
-}
-
-#display{
-font-size:43px;
-font-weight:700;
-background:none;
-border:0;
-outline:0;
-color:#fff;
-text-align:right;
-width:100%;
-}
-
-.scientific{
-display:none;
-grid-template-columns:repeat(5,1fr);
-gap:7px;
-margin-bottom:9px;
-}
-
-.scientific.show{
-display:grid;
-}
-
-.scientific button{
-height:45px;
-border:1px solid rgba(255,255,255,.06);
-border-radius:12px;
-background:#191f32;
-color:#cdd2e1;
-font-size:13px;
-cursor:pointer;
-}
-
-.scientific button:hover{
-background:#252c43;
-}
-
-.keys{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:9px;
-}
-
-.key{
-height:64px;
-border:0;
-border-radius:17px;
-background:#1a2033;
-color:#fff;
-font-size:20px;
-cursor:pointer;
-box-shadow:inset 0 1px rgba(255,255,255,.04);
-transition:.12s;
-}
-
-.key:hover{
-background:#252c43;
-}
-
-.key:active{
-transform:scale(.94);
-}
-
-.function{
-background:#252c40;
-color:#d4d8e5;
-}
-
-.operator{
-background:linear-gradient(145deg,#6736cf,#8c56f7);
-}
-
-.equals{
-background:linear-gradient(145deg,#a36bff,#6733db);
-box-shadow:0 8px 25px rgba(139,92,246,.25);
-}
-
-.memory{
-font-size:15px;
-}
-
-.history{
-margin-top:18px;
-padding:18px;
-border-radius:22px;
-background:rgba(16,20,35,.8);
-border:1px solid rgba(255,255,255,.08);
-}
-
-.history-head{
-display:flex;
-justify-content:space-between;
-margin-bottom:12px;
-}
-
-.history-head button{
-background:none;
-border:0;
-color:#9d72ff;
-cursor:pointer;
-}
-
-.history-list{
-max-height:180px;
-overflow:auto;
-}
-
-.history-item{
-padding:11px 13px;
-margin-bottom:7px;
-border-radius:11px;
-background:#0b0f1c;
-color:#adb4c7;
-font-size:13px;
-}
-
-.features{
-margin:55px auto 0;
-max-width:1000px;
-}
-
-.features h2{
-text-align:center;
-font-size:30px;
-margin-bottom:22px;
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:15px;
-}
-
-.card{
-padding:22px;
-border-radius:20px;
-background:rgba(17,21,37,.7);
-border:1px solid rgba(255,255,255,.08);
-}
-
-.card-icon{
-font-size:28px;
-margin-bottom:12px;
-}
-
-.card h3{
-margin-bottom:8px;
-}
-
-.card p{
-color:#8e96aa;
-font-size:14px;
-line-height:1.5;
-}
-
-footer{
-margin-top:60px;
-padding:28px 15px;
-text-align:center;
-border-top:1px solid rgba(255,255,255,.08);
-color:#70788e;
-font-size:13px;
-}
-
-@media(max-width:600px){
-
-header{
-padding:0 16px;
-}
-
-main{
-padding:30px 9px 60px;
-}
-
-.hero h1{
-font-size:43px;
-}
-
-.calculator{
-padding:11px;
-border-radius:24px;
-}
-
-.display{
-height:125px;
-}
-
-#display{
-font-size:34px;
-}
-
-.key{
-height:58px;
-border-radius:15px;
-font-size:18px;
-}
-
-.scientific{
-gap:5px;
-}
-
-.scientific button{
-font-size:11px;
-height:42px;
-}
-
-.cards{
-grid-template-columns:1fr;
-}
-
-}
-</style>
-</head>
-
-<body>
-
-<header>
-<div class="logo">Calcora <span>Calculator</span></div>
-<button class="header-btn">⚡ Fast</button>
-</header>
-
-<main>
-
-<section class="hero">
-
-<div class="badge">✦ NEXT-GEN ONLINE CALCULATOR</div>
-
-<h1>
-Calculate <span class="gradient">Smarter.</span>
-</h1>
-
-<p>
-A beautiful, powerful and completely free calculator
-designed for everyday and scientific calculations.
-</p>
-
-</section>
-
-<div class="calculator-wrap">
-
-<div class="calculator">
-
-<div class="topbar">
-
-<div class="mode">
-<button id="standardBtn" class="active" onclick="setMode('standard')">
-Standard
-</button>
-
-<button id="scientificBtn" onclick="setMode('scientific')">
-Scientific
-</button>
-</div>
-
-<button class="angle" id="angleBtn" onclick="toggleAngle()">
-DEG
-</button>
-
-</div>
-
-<div class="display">
-
-<div class="expression" id="expression"></div>
-
-<input id="display" value="0" readonly>
-
-</div>
-
-<div class="scientific" id="scientific">
-
-<button onclick="special('sin')">sin</button>
-<button onclick="special('cos')">cos</button>
-<button onclick="special('tan')">tan</button>
-<button onclick="special('log')">log</button>
-<button onclick="special('ln')">ln</button>
-
-<button onclick="special('sqrt')">√</button>
-<button onclick="special('square')">x²</button>
-<button onclick="special('cube')">x³</button>
-<button onclick="special('pi')">π</button>
-<button onclick="special('e')">e</button>
-
-<button onclick="special('inverse')">1/x</button>
-<button onclick="special('factorial')">x!</button>
-<button onclick="press('**')">xʸ</button>
-<button onclick="press('(')">(</button>
-<button onclick="press(')')">)</button>
-
-</div>
-
-<div class="keys">
-
-<button class="key function" onclick="clearAll()">AC</button>
-<button class="key function" onclick="backspace()">⌫</button>
-<button class="key function" onclick="percent()">%</button>
-<button class="key operator" onclick="press('/')">÷</button>
-
-<button class="key" onclick="press('7')">7</button>
-<button class="key" onclick="press('8')">8</button>
-<button class="key" onclick="press('9')">9</button>
-<button class="key operator" onclick="press('*')">×</button>
-
-<button class="key" onclick="press('4')">4</button>
-<button class="key" onclick="press('5')">5</button>
-<button class="key" onclick="press('6')">6</button>
-<button class="key operator" onclick="press('-')">−</button>
-
-<button class="key" onclick="press('1')">1</button>
-<button class="key" onclick="press('2')">2</button>
-<button class="key" onclick="press('3')">3</button>
-<button class="key operator" onclick="press('+')">+</button>
-
-<button class="key memory" onclick="memoryClear()">MC</button>
-<button class="key" onclick="press('0')">0</button>
-<button class="key" onclick="press('.')">.</button>
-<button class="key equals" onclick="calculate()">=</button>
-
-<button class="key memory" onclick="memoryAdd()">M+</button>
-<button class="key memory" onclick="memorySubtract()">M−</button>
-<button class="key memory" onclick="memoryRecall()">MR</button>
-<button class="key function" onclick="toggleSign()">±</button>
-
-</div>
-
-</div>
-
-<div class="history">
-
-<div class="history-head">
-<strong>Calculation History</strong>
-<button onclick="clearHistory()">Clear</button>
-</div>
-
-<div class="history-list" id="historyList">
-<div class="history-item">
-Your calculations will appear here.
-</div>
-</div>
-
-</div>
-
-</div>
-
-<section class="features">
-
-<h2>Why Calcora?</h2>
-
-<div class="cards">
-
-<div class="card">
-<div class="card-icon">🔬</div>
-<h3>Scientific Mode</h3>
-<p>
-Advanced mathematical functions including trigonometry,
-logarithms, powers and roots.
-</p>
-</div>
-
-<div class="card">
-<div class="card-icon">⚡</div>
-<h3>Instant Results</h3>
-<p>
-Calculations happen instantly in your browser without
-an API or account.
-</p>
-</div>
-
-<div class="card">
-<div class="card-icon">📱</div>
-<h3>Made for Mobile</h3>
-<p>
-A responsive interface designed to feel great on phones,
-tablets and desktops.
-</p>
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-<footer>
-© 2026 Calcora Calculator • Free Online Calculator
-</footer>
-
-<script>
-
-let current="";
-let memory=0;
-let angleMode="DEG";
-
-const display=document.getElementById("display");
-const expression=document.getElementById("expression");
-const historyList=document.getElementById("historyList");
-
-function update(){
-display.value=current||"0";
-}
-
-function press(value){
-
-if(current==="Error") current="";
-
-current+=value;
-
-update();
-}
-
-function clearAll(){
-current="";
-expression.textContent="";
-update();
-}
-
-function backspace(){
-current=current.slice(0,-1);
-update();
-}
-
-function percent(){
-
-if(!current)return;
-
-try{
-current=String(parseFloat(current)/100);
-update();
-}catch{
-current="Error";
-update();
-}
-
-}
-
 function calculate(){
 
-if(!current)return;
+  if(!current) return;
 
-try{
+  try{
 
-const safe=current.replace(/[^0-9+\-*/().]/g,"");
+    const old = current.trim();
 
-if(!safe)throw new Error();
+    // ==========================================
+    // VERY LARGE INTEGER CALCULATIONS
+    // Uses BigInt to prevent precision loss
+    // ==========================================
 
-const result=Function(
-'"use strict";return ('+safe+')'
-)();
+    if(
+      /^[0-9+\-*()\s]+$/.test(old) &&
+      !old.includes("/") &&
+      !old.includes(".")
+    ){
 
-if(!Number.isFinite(result))throw new Error();
+      const numbersOnly = old.replace(/[^0-9]/g,"");
 
-const old=current;
+      if(numbersOnly.length > 15){
 
-current=String(Number(result.toFixed(12)));
+        const bigExpression = old.replace(
+          /(\d+)/g,
+          "$1n"
+        );
 
-expression.textContent=old+" =";
+        const result = Function(
+          '"use strict"; return (' +
+          bigExpression +
+          ')'
+        )();
 
-update();
+        current = result.toString();
 
-addHistory(old,current);
+        expression.textContent =
+          old + " =";
 
-}catch{
+        update();
 
-current="Error";
-expression.textContent="";
-update();
+        addHistory(
+          old,
+          current
+        );
 
+        return;
+      }
+    }
+
+    // ==========================================
+    // NORMAL CALCULATIONS
+    // ==========================================
+
+    const safe = old.replace(
+      /[^0-9+\-*/().]/g,
+      ""
+    );
+
+    if(!safe){
+      throw new Error();
+    }
+
+    const result = Function(
+      '"use strict"; return (' +
+      safe +
+      ')'
+    )();
+
+    if(!Number.isFinite(result)){
+      throw new Error();
+    }
+
+    current = String(
+      Number(result.toFixed(12))
+    );
+
+    expression.textContent =
+      old + " =";
+
+    update();
+
+    addHistory(
+      old,
+      current
+    );
+
+  }catch(error){
+
+    current = "Error";
+
+    expression.textContent = "";
+
+    update();
+
+  }
 }
-
-}
-
-function addHistory(a,b){
-
-const first=historyList.querySelector(".history-item");
-
-if(first&&first.textContent.includes("Your calculations")){
-historyList.innerHTML="";
-}
-
-const item=document.createElement("div");
-
-item.className="history-item";
-item.textContent=a+" = "+b;
-
-historyList.prepend(item);
-
-}
-
-function clearHistory(){
-
-historyList.innerHTML=
-'<div class="history-item">Your calculations will appear here.</div>';
-
-}
-
-function setMode(mode){
-
-const sci=mode==="scientific";
-
-document.getElementById("scientific").classList.toggle("show",sci);
-
-document.getElementById("standardBtn")
-.classList.toggle("active",!sci);
-
-document.getElementById("scientificBtn")
-.classList.toggle("active",sci);
-
-}
-
-function toggleAngle(){
-
-angleMode=angleMode==="DEG"?"RAD":"DEG";
-
-document.getElementById("angleBtn").textContent=angleMode;
-
-}
-
-function radians(x){
-
-return angleMode==="DEG"
-?x*Math.PI/180
-:x;
-
-}
-
-function special(type){
-
-try{
-
-if(type==="pi"){
-press(String(Math.PI));
-return;
-}
-
-if(type==="e"){
-press(String(Math.E));
-return;
-}
-
-const x=parseFloat(current);
-
-if(!Number.isFinite(x))throw new Error();
-
-let result;
-
-if(type==="sin")result=Math.sin(radians(x));
-
-if(type==="cos")result=Math.cos(radians(x));
-
-if(type==="tan")result=Math.tan(radians(x));
-
-if(type==="log")result=Math.log10(x);
-
-if(type==="ln")result=Math.log(x);
-
-if(type==="sqrt")result=Math.sqrt(x);
-
-if(type==="square")result=x*x;
-
-if(type==="cube")result=x*x*x;
-
-if(type==="inverse")result=1/x;
-
-if(type==="factorial"){
-
-if(x<0||!Number.isInteger(x)||x>170)
-throw new Error();
-
-result=1;
-
-for(let i=2;i<=x;i++)result*=i;
-
-}
-
-if(!Number.isFinite(result))throw new Error();
-
-const old=current;
-
-current=String(Number(result.toFixed(12)));
-
-expression.textContent=type+"("+old+") =";
-
-update();
-
-addHistory(type+"("+old+")",current);
-
-}catch{
-
-current="Error";
-update();
-
-}
-
-}
-
-function memoryClear(){
-memory=0;
-}
-
-function memoryAdd(){
-
-const x=parseFloat(current);
-
-if(Number.isFinite(x))memory+=x;
-
-}
-
-function memorySubtract(){
-
-const x=parseFloat(current);
-
-if(Number.isFinite(x))memory-=x;
-
-}
-
-function memoryRecall(){
-
-current=String(memory);
-update();
-
-}
-
-function toggleSign(){
-
-if(!current||current==="0")return;
-
-current=current.startsWith("-")
-?current.slice(1)
-:"-"+current;
-
-update();
-
-}
-
-document.addEventListener("keydown",e=>{
-
-if("0123456789.+-*/()".includes(e.key))
-press(e.key);
-
-if(e.key==="Enter"||e.key==="=")
-calculate();
-
-if(e.key==="Escape")
-clearAll();
-
-if(e.key==="Backspace")
-backspace();
-
-});
-
-</script>
-
-</body>
-</html>
