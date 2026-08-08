@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Calcora Calculator – Free Online Calculator</title>
+  <meta name="description" content="Calcora Calculator is a fast, free and accurate online calculator for everyday calculations.">
+  <meta name="theme-color" content="#080b18">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, #18234d 0, transparent 35%),
+        radial-gradient(circle at 85% 20%, #30144f 0, transparent 35%),
+        #070a14;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    header {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(15px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #9b5cff;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      color: #b9bdd0;
+      font-size: 14px;
+    }
+
+    nav a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .hero {
+      max-width: 1150px;
+      margin: auto;
+      padding: 70px 20px 40px;
+      display: grid;
+      grid-template-columns: 1fr 430px;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.02;
+      margin-bottom: 22px;
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, #ffffff, #a96cff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: #aeb4c8;
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 570px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 9px 14px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(155,92,255,.35);
+      border-radius: 30px;
+      background: rgba(155,92,255,.1);
+      color: #c79dff;
+      font-size: 13px;
+    }
+
+    .calculator {
+      background: rgba(18,22,39,.88);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 28px;
+      padding: 20px;
+      box-shadow: 0 25px 80px rgba(0,0,0,.5);
+    }
+
+    .display {
+      height: 105px;
+      background: #090c17;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      text-align: right;
+      overflow: hidden;
+    }
+
+    #expression {
+      color: #858ca1;
+      font-size: 15px;
+      min-height: 22px;
+    }
+
+    #result {
+      font-size: 36px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+
+    .keys {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      border: 0;
+      min-height: 62px;
+      border-radius: 16px;
+      background: #171c2d;
+      color: #fff;
+      font-size: 19px;
+      cursor: pointer;
+      transition: .15s;
+    }
+
+    button:active {
+      transform: scale(.95);
+    }
+
+    button:hover {
+      background: #222940;
+    }
+
+    .function {
+      color: #c7cbd8;
+      background: #20263a;
+    }
+
+    .operator {
+      background: linear-gradient(135deg, #6332c9, #8d4fff);
+    }
+
+    .equals {
+      background: linear-gradient(135deg, #9b5cff, #6130d6);
+    }
+
+    .zero {
+      grid-column: span 2;
+    }
+
+    .section {
+      max-width: 1150px;
+      margin: 20px auto 80px;
+      padding: 0 20px;
+    }
+
+    .section h2 {
+      font-size: 30px;
+      margin-bottom: 25px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 25px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 22px;
+      background: rgba(17,21,37,.75);
+    }
+
+    .icon {
+      font-size: 30px;
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: #9299ae;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 30px 20px;
+      text-align: center;
+      color: #737a8f;
+      font-size: 13px;
+    }
+
+    @media (max-width: 850px) {
+      nav {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 45px;
+      }
+
+      .hero h1 {
+        font-size: 46px;
+      }
+
+      .calculator {
+        max-width: 500px;
+        width: 100%;
+        margin: auto;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 430px) {
+      header {
+        padding: 0 20px;
+      }
+
+      .hero {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+      }
+
+      .calculator {
+        padding: 14px;
+        border-radius: 22px;
+      }
+
+      button {
+        min-height: 58px;
+      }
+
+      #result {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Calcora <span>Calculator</span></div>
+
+  <nav>
+    <a href="#calculator">Calculator</a>
+    <a href="#tools">Tools</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero">
+
+    <div>
+      <div class="badge">⚡ Fast • Free • Accurate</div>
+
+      <h1>
+        Smart <span class="gradient">Calculator</span>
+        for Everyone
+      </h1>
+
+      <p>
+        Calculate quickly and accurately with Calcora.
+        A simple, modern and completely free online calculator.
+      </p>
+    </div>
+
+    <div class="calculator" id="calculator">
+
+      <div class="display">
+        <div id="expression"></div>
+        <div id="result">0</div>
+      </div>
+
+      <div class="keys">
+
+        <button class="function" onclick="clearAll()">AC</button>
+        <button class="function" onclick="backspace()">⌫</button>
+        <button class="function" onclick="percentage()">%</button>
+        <button class="operator" onclick="press('/')">÷</button>
+
+        <button onclick="press('7')">7</button>
+        <button onclick="press('8')">8</button>
+        <button onclick="press('9')">9</button>
+        <button class="operator" onclick="press('*')">×</button>
+
+        <button onclick="press('4')">4</button>
+        <button onclick="press('5')">5</button>
+        <button onclick="press('6')">6</button>
+        <button class="operator" onclick="press('-')">−</button>
+
+        <button onclick="press('1')">1</button>
+        <button onclick="press('2')">2</button>
+        <button onclick="press('3')">3</button>
+        <button class="operator" onclick="press('+')">+</button>
+
+        <button class="zero" onclick="press('0')">0</button>
+        <button onclick="press('.')">.</button>
+        <button class="equals" onclick="calculate()">=</button>
+
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section" id="tools">
+
+    <h2>Popular Calculators</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">📊</div>
+        <h3>Percentage Calculator</h3>
+        <p>Calculate percentages quickly and easily.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🎂</div>
+        <h3>Age Calculator</h3>
+        <p>Calculate your exact age in years, months and days.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">💰</div>
+        <h3>Discount Calculator</h3>
+        <p>Find discounts and final prices instantly.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer id="about">
+  © 2026 Calcora Calculator • Free Online Calculator
+</footer>
+
+<script>
+  let current = "";
+
+  const result = document.getElementById("result");
+  const expression = document.getElementById("expression");
+
+  function press(value) {
+    if (current === "Error") current = "";
+
+    current += value;
+    result.textContent = current;
+  }
+
+  function clearAll() {
+    current = "";
+    result.textContent = "0";
+    expression.textContent = "";
+  }
+
+  function backspace() {
+    current = current.slice(0, -1);
+    result.textContent = current || "0";
+  }
+
+  function percentage() {
+    if (!current) return;
+
+    try {
+      current = String(parseFloat(current) / 100);
+      result.textContent = current;
+    } catch {
+      result.textContent = "Error";
+    }
+  }
+
+  function calculate() {
+    if (!current) return;
+
+    try {
+      const safe = current.replace(/[^0-9+\-*/().]/g, "");
+
+      if (!safe) throw new Error();
+
+      const answer = Function('"use strict"; return (' + safe + ')')();
+
+      if (!Number.isFinite(answer)) throw new Error();
+
+      expression.textContent = current + " =";
+      current = String(Number(answer.toFixed(12)));
+      result.textContent = current;
+
+    } catch {
+      expression.textContent = "";
+      result.textContent = "Error";
+      current = "Error";
+    }
+  }
+
+  document.addEventListener("keydown", function(e) {
+
+    if ("0123456789+-*/.".includes(e.key)) {
+      press(e.key);
+    }
+
+    if (e.key === "Enter" || e.key === "=") {
+      calculate();
+    }
+
+    if (e.key === "Escape") {
+      clearAll();
+    }
+
+    if (e.key === "Backspace") {
+      backspace();
+    }
+
+    if (e.key === "%") {
+      percentage();
+    }
+
+  });
+</script>
+
+</body>
+</html>
