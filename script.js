@@ -1,23 +1,23 @@
+
 /* =========================================================
    CALCORA CALCULATOR
-   Complete Calculator Functionality
+   Final Corrected Calculator Functionality
    ========================================================= */
 
 "use strict";
 
-/* =========================
+/* =========================================================
    STATE
-   ========================= */
+   ========================================================= */
 
 let current = "";
 let memory = 0;
 let angleMode = "DEG";
-
 let audioContext = null;
 
-/* =========================
+/* =========================================================
    DOM ELEMENTS
-   ========================= */
+   ========================================================= */
 
 const display = document.getElementById("display");
 const expression = document.getElementById("expression");
@@ -28,9 +28,9 @@ const standardButton = document.getElementById("standardBtn");
 const scientificButton = document.getElementById("scientificBtn");
 const angleButton = document.getElementById("angleBtn");
 
-/* =========================
+/* =========================================================
    DISPLAY
-   ========================= */
+   ========================================================= */
 
 function updateDisplay() {
   if (!display) return;
@@ -38,19 +38,19 @@ function updateDisplay() {
   display.value = current || "0";
 }
 
-/* =========================
+/* =========================================================
    BUTTON SOUND
-   ========================= */
+   ========================================================= */
 
 function buttonSound() {
   try {
-    const AudioContext =
+    const AudioCtx =
       window.AudioContext || window.webkitAudioContext;
 
-    if (!AudioContext) return;
+    if (!AudioCtx) return;
 
     if (!audioContext) {
-      audioContext = new AudioContext();
+      audioContext = new AudioCtx();
     }
 
     if (audioContext.state === "suspended") {
@@ -82,13 +82,13 @@ function buttonSound() {
       audioContext.currentTime + 0.06
     );
   } catch (error) {
-    // Sound is optional.
+    /* Sound is optional */
   }
 }
 
-/* =========================
+/* =========================================================
    INPUT
-   ========================= */
+   ========================================================= */
 
 function press(value) {
   buttonSound();
@@ -97,14 +97,62 @@ function press(value) {
     current = "";
   }
 
+  /*
+    Prevent obvious invalid operator combinations.
+  */
+
+  const operators = ["+", "-", "*", "/", "**"];
+
+  const lastTwo = current.slice(-2);
+  const lastOne = current.slice(-1);
+
+  if (operators.includes(value)) {
+
+    if (!current && value !== "-") {
+      return;
+    }
+
+    if (
+      operators.includes(lastOne) &&
+      value !== "-" &&
+      value !== "**"
+    ) {
+      current = current.slice(0, -1);
+    }
+
+    if (
+      value === "**" &&
+      (
+        current.endsWith("**") ||
+        current.endsWith("*")
+      )
+    ) {
+      return;
+    }
+  }
+
+  /*
+    Prevent multiple decimal points
+    in the same number.
+  */
+
+  if (value === ".") {
+    const parts = current.split(/[+\-*/()]/);
+    const lastNumber = parts[parts.length - 1];
+
+    if (lastNumber.includes(".")) {
+      return;
+    }
+  }
+
   current += value;
 
   updateDisplay();
 }
 
-/* =========================
+/* =========================================================
    CLEAR
-   ========================= */
+   ========================================================= */
 
 function clearAll() {
   buttonSound();
@@ -118,9 +166,9 @@ function clearAll() {
   updateDisplay();
 }
 
-/* =========================
+/* =========================================================
    BACKSPACE
-   ========================= */
+   ========================================================= */
 
 function backspace() {
   buttonSound();
@@ -128,15 +176,21 @@ function backspace() {
   if (current === "Error") {
     current = "";
   } else {
-    current = current.slice(0, -1);
+
+    if (current.endsWith("**")) {
+      current = current.slice(0, -2);
+    } else {
+      current = current.slice(0, -1);
+    }
+
   }
 
   updateDisplay();
 }
 
-/* =========================
+/* =========================================================
    PERCENT
-   ========================= */
+   ========================================================= */
 
 function percent() {
   buttonSound();
@@ -146,37 +200,75 @@ function percent() {
   }
 
   try {
-    const value = Number(current);
+    const value = evaluateExpression(current);
 
     if (!Number.isFinite(value)) {
       throw new Error("Invalid number");
     }
 
-    current = String(value / 100);
+    const old = current;
+
+    current = formatNumber(value / 100);
+
+    expression.textContent =
+      visibleExpression(old) + "% =";
 
     updateDisplay();
+
+    addHistory(
+      visibleExpression(old) + "%",
+      current
+    );
+
   } catch (error) {
     current = "Error";
+    expression.textContent = "";
     updateDisplay();
   }
 }
 
-/* =========================
+/* =========================================================
+   NUMBER FORMATTING
+   ========================================================= */
+
+function formatNumber(value) {
+
+  if (typeof value === "bigint") {
+    return value.toString();
+  }
+
+  if (!Number.isFinite(value)) {
+    throw new Error("Invalid result");
+  }
+
+  if (Object.is(value, -0)) {
+    return "0";
+  }
+
+  const rounded =
+    Number(value.toPrecision(15));
+
+  return String(rounded);
+}
+
+/* =========================================================
    BIG INTEGER DETECTION
-   ========================= */
+   ========================================================= */
 
 function isBigIntegerExpression(input) {
   return (
     /^[0-9+\-*()\s]+$/.test(input) &&
-    !input.includes("/")
+    !input.includes("/") &&
+    !input.includes("**")
   );
 }
 
-/* =========================
+/* =========================================================
    BIG INTEGER CALCULATOR
-   ========================= */
+   ========================================================= */
 
 function calculateBigInteger(input) {
+
   const tokens = input.match(
     /\d+|[()+\-*]/g
   );
@@ -188,14 +280,19 @@ function calculateBigInteger(input) {
   let position = 0;
 
   function parseExpression() {
+
     let result = parseTerm();
 
     while (
       position < tokens.length &&
-      (tokens[position] === "+" ||
-        tokens[position] === "-")
+      (
+        tokens[position] === "+" ||
+        tokens[position] === "-"
+      )
     ) {
-      const operator = tokens[position++];
+
+      const operator =
+        tokens[position++];
 
       const value = parseTerm();
 
@@ -210,12 +307,14 @@ function calculateBigInteger(input) {
   }
 
   function parseTerm() {
+
     let result = parseFactor();
 
     while (
       position < tokens.length &&
       tokens[position] === "*"
     ) {
+
       position++;
 
       result *= parseFactor();
@@ -225,11 +324,13 @@ function calculateBigInteger(input) {
   }
 
   function parseFactor() {
+
     if (position >= tokens.length) {
       throw new Error("Invalid expression");
     }
 
-    const token = tokens[position];
+    const token =
+      tokens[position];
 
     if (token === "-") {
       position++;
@@ -242,11 +343,15 @@ function calculateBigInteger(input) {
     }
 
     if (token === "(") {
+
       position++;
 
-      const result = parseExpression();
+      const result =
+        parseExpression();
 
-      if (tokens[position] !== ")") {
+      if (
+        tokens[position] !== ")"
+      ) {
         throw new Error("Missing bracket");
       }
 
@@ -256,6 +361,7 @@ function calculateBigInteger(input) {
     }
 
     if (/^\d+$/.test(token)) {
+
       position++;
 
       return BigInt(token);
@@ -264,7 +370,8 @@ function calculateBigInteger(input) {
     throw new Error("Invalid token");
   }
 
-  const result = parseExpression();
+  const result =
+    parseExpression();
 
   if (position !== tokens.length) {
     throw new Error("Invalid expression");
@@ -273,28 +380,158 @@ function calculateBigInteger(input) {
   return result;
 }
 
-/* =========================
-   NORMAL CALCULATOR
-   ========================= */
+/* =========================================================
+   NORMAL EXPRESSION PARSER
+   Supports:
+   + - * / ** ( )
+   decimals
+   ========================================================= */
 
-function calculateNormal(input) {
-  const safe = input.replace(
-    /[^0-9+\-*/().]/g,
-    ""
-  );
+function evaluateExpression(input) {
 
-  if (!safe) {
+  const tokens = tokenize(input);
+
+  if (!tokens.length) {
+    throw new Error("Empty expression");
+  }
+
+  let position = 0;
+
+  function peek() {
+    return tokens[position];
+  }
+
+  function consume() {
+    return tokens[position++];
+  }
+
+  function parseExpression() {
+
+    let result = parseTerm();
+
+    while (
+      peek() === "+" ||
+      peek() === "-"
+    ) {
+
+      const operator = consume();
+
+      const right = parseTerm();
+
+      if (operator === "+") {
+        result += right;
+      } else {
+        result -= right;
+      }
+    }
+
+    return result;
+  }
+
+  function parseTerm() {
+
+    let result = parsePower();
+
+    while (
+      peek() === "*" ||
+      peek() === "/"
+    ) {
+
+      const operator = consume();
+
+      const right = parsePower();
+
+      if (operator === "*") {
+        result *= right;
+      } else {
+
+        if (right === 0) {
+          throw new Error("Division by zero");
+        }
+
+        result /= right;
+      }
+    }
+
+    return result;
+  }
+
+  function parsePower() {
+
+    let left = parseUnary();
+
+    /*
+      Power is right associative:
+      2 ** 3 ** 2
+      = 2 ** (3 ** 2)
+    */
+
+    if (peek() === "**") {
+
+      consume();
+
+      const right = parsePower();
+
+      left = Math.pow(left, right);
+    }
+
+    return left;
+  }
+
+  function parseUnary() {
+
+    if (peek() === "+") {
+      consume();
+      return parseUnary();
+    }
+
+    if (peek() === "-") {
+      consume();
+      return -parseUnary();
+    }
+
+    return parsePrimary();
+  }
+
+  function parsePrimary() {
+
+    const token = peek();
+
+    if (token === "(") {
+
+      consume();
+
+      const result =
+        parseExpression();
+
+      if (peek() !== ")") {
+        throw new Error("Missing bracket");
+      }
+
+      consume();
+
+      return result;
+    }
+
+    if (
+      typeof token === "string" &&
+      /^[0-9]+(?:\.[0-9]+)?$/.test(token)
+    ) {
+
+      consume();
+
+      return Number(token);
+    }
+
     throw new Error("Invalid expression");
   }
 
-  /*
-    The expression has already been restricted
-    to calculator characters only.
-  */
+  const result =
+    parseExpression();
 
-  const result = Function(
-    '"use strict"; return (' + safe + ");"
-  )();
+  if (position !== tokens.length) {
+    throw new Error("Invalid expression");
+  }
 
   if (
     typeof result !== "number" ||
@@ -303,42 +540,166 @@ function calculateNormal(input) {
     throw new Error("Invalid result");
   }
 
-  return String(
-    Number(result.toFixed(12))
-  );
+  return result;
 }
 
-/* =========================
-   DISPLAY EXPRESSION
-   ========================= */
+/* =========================================================
+   TOKENIZER
+   ========================================================= */
+
+function tokenize(input) {
+
+  const tokens = [];
+  let i = 0;
+
+  while (i < input.length) {
+
+    const char = input[i];
+
+    /*
+      Ignore spaces
+    */
+
+    if (/\s/.test(char)) {
+      i++;
+      continue;
+    }
+
+    /*
+      Power operator
+    */
+
+    if (
+      char === "*" &&
+      input[i + 1] === "*"
+    ) {
+
+      tokens.push("**");
+
+      i += 2;
+      continue;
+    }
+
+    /*
+      Normal operators
+    */
+
+    if (
+      "+-*/()".includes(char)
+    ) {
+
+      tokens.push(char);
+
+      i++;
+      continue;
+    }
+
+    /*
+      Numbers
+    */
+
+    if (
+      /[0-9.]/.test(char)
+    ) {
+
+      let number = "";
+      let dots = 0;
+
+      while (
+        i < input.length &&
+        /[0-9.]/.test(input[i])
+      ) {
+
+        if (input[i] === ".") {
+          dots++;
+
+          if (dots > 1) {
+            throw new Error(
+              "Invalid decimal"
+            );
+          }
+        }
+
+        number += input[i];
+
+        i++;
+      }
+
+      if (
+        number === "." ||
+        number === ""
+      ) {
+        throw new Error(
+          "Invalid number"
+        );
+      }
+
+      tokens.push(number);
+
+      continue;
+    }
+
+    throw new Error(
+      "Invalid character"
+    );
+  }
+
+  return tokens;
+}
+
+/* =========================================================
+   VISIBLE EXPRESSION
+   ========================================================= */
 
 function visibleExpression(value) {
+
   return String(value)
     .replace(/\*\*/g, "^")
     .replace(/\*/g, "×")
     .replace(/\//g, "÷");
 }
 
-/* =========================
+/* =========================================================
    MAIN CALCULATION
-   ========================= */
+   ========================================================= */
 
 function calculate() {
+
   buttonSound();
 
-  if (!current || current === "Error") {
+  if (
+    !current ||
+    current === "Error"
+  ) {
     return;
   }
 
   try {
-    const old = current.trim();
+
+    const old =
+      current.trim();
 
     let result;
 
-    if (isBigIntegerExpression(old)) {
-      result = calculateBigInteger(old).toString();
+    /*
+      Use BigInt for large
+      integer + - * expressions.
+    */
+
+    if (
+      isBigIntegerExpression(old)
+    ) {
+
+      result =
+        calculateBigInteger(old)
+          .toString();
+
     } else {
-      result = calculateNormal(old);
+
+      result =
+        formatNumber(
+          evaluateExpression(old)
+        );
     }
 
     current = result;
@@ -352,7 +713,9 @@ function calculate() {
       visibleExpression(old),
       current
     );
+
   } catch (error) {
+
     current = "Error";
 
     expression.textContent = "";
@@ -361,15 +724,23 @@ function calculate() {
   }
 }
 
-/* =========================
+/* =========================================================
    HISTORY
-   ========================= */
+   ========================================================= */
 
-function addHistory(calculation, result) {
-  if (!historyList) return;
+function addHistory(
+  calculation,
+  result
+) {
+
+  if (!historyList) {
+    return;
+  }
 
   const first =
-    historyList.querySelector(".history-item");
+    historyList.querySelector(
+      ".history-item"
+    );
 
   if (
     first &&
@@ -377,28 +748,48 @@ function addHistory(calculation, result) {
       "Your calculations"
     )
   ) {
+
     historyList.innerHTML = "";
   }
 
   const item =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
-  item.className = "history-item";
+  item.className =
+    "history-item";
 
   item.textContent =
     calculation + " = " + result;
 
   historyList.prepend(item);
+
+  /*
+    Keep history manageable.
+  */
+
+  while (
+    historyList.children.length > 50
+  ) {
+
+    historyList.removeChild(
+      historyList.lastElementChild
+    );
+  }
 }
 
-/* =========================
+/* =========================================================
    CLEAR HISTORY
-   ========================= */
+   ========================================================= */
 
 function clearHistory() {
+
   buttonSound();
 
-  if (!historyList) return;
+  if (!historyList) {
+    return;
+  }
 
   historyList.innerHTML =
     '<div class="history-item">' +
@@ -406,11 +797,12 @@ function clearHistory() {
     "</div>";
 }
 
-/* =========================
+/* =========================================================
    CALCULATOR MODE
-   ========================= */
+   ========================================================= */
 
 function setMode(mode) {
+
   buttonSound();
 
   if (
@@ -422,7 +814,10 @@ function setMode(mode) {
   }
 
   if (mode === "scientific") {
-    scientificPanel.classList.add("show");
+
+    scientificPanel.classList.add(
+      "show"
+    );
 
     standardButton.classList.remove(
       "active"
@@ -431,12 +826,16 @@ function setMode(mode) {
     scientificButton.classList.add(
       "active"
     );
+
   } else {
+
     scientificPanel.classList.remove(
       "show"
     );
 
-    standardButton.classList.add("active");
+    standardButton.classList.add(
+      "active"
+    );
 
     scientificButton.classList.remove(
       "active"
@@ -444,11 +843,12 @@ function setMode(mode) {
   }
 }
 
-/* =========================
+/* =========================================================
    DEG / RAD
-   ========================= */
+   ========================================================= */
 
 function toggleAngle() {
+
   buttonSound();
 
   angleMode =
@@ -457,109 +857,203 @@ function toggleAngle() {
       : "DEG";
 
   if (angleButton) {
-    angleButton.textContent = angleMode;
+    angleButton.textContent =
+      angleMode;
   }
 }
 
-/* =========================
+/* =========================================================
    ANGLE CONVERSION
-   ========================= */
+   ========================================================= */
 
 function radians(value) {
+
   if (angleMode === "DEG") {
-    return value * Math.PI / 180;
+
+    return (
+      value * Math.PI / 180
+    );
   }
 
   return value;
 }
 
-/* =========================
+/* =========================================================
    SCIENTIFIC FUNCTIONS
-   ========================= */
+   ========================================================= */
 
 function special(type) {
+
   buttonSound();
 
   try {
-    /* PI */
+
+    /*
+      PI
+    */
 
     if (type === "pi") {
-      current = String(Math.PI);
+
+      current =
+        String(Math.PI);
 
       updateDisplay();
+
       return;
     }
 
-    /* E */
+    /*
+      E
+    */
 
     if (type === "e") {
-      current = String(Math.E);
+
+      current =
+        String(Math.E);
 
       updateDisplay();
+
       return;
     }
 
-    if (!current || current === "Error") {
+    if (
+      !current ||
+      current === "Error"
+    ) {
       return;
     }
 
-    const value = Number(current);
+    /*
+      Evaluate the current
+      expression first.
+    */
+
+    const value =
+      evaluateExpression(current);
 
     if (!Number.isFinite(value)) {
-      throw new Error("Invalid number");
+      throw new Error(
+        "Invalid number"
+      );
     }
 
     let result;
 
     switch (type) {
+
       case "sin":
-        result = Math.sin(
-          radians(value)
-        );
+
+        result =
+          Math.sin(
+            radians(value)
+          );
+
         break;
 
       case "cos":
-        result = Math.cos(
-          radians(value)
-        );
+
+        result =
+          Math.cos(
+            radians(value)
+          );
+
         break;
 
       case "tan":
-        result = Math.tan(
-          radians(value)
-        );
+
+        result =
+          Math.tan(
+            radians(value)
+          );
+
+        /*
+          Avoid tiny floating-point
+          values such as 1.224e-16.
+        */
+
+        if (
+          Math.abs(result) <
+          1e-12
+        ) {
+          result = 0;
+        }
+
         break;
 
       case "log":
-        result = Math.log10(value);
+
+        if (value <= 0) {
+          throw new Error(
+            "Invalid logarithm"
+          );
+        }
+
+        result =
+          Math.log10(value);
+
         break;
 
       case "ln":
-        result = Math.log(value);
+
+        if (value <= 0) {
+          throw new Error(
+            "Invalid logarithm"
+          );
+        }
+
+        result =
+          Math.log(value);
+
         break;
 
       case "sqrt":
-        result = Math.sqrt(value);
+
+        if (value < 0) {
+          throw new Error(
+            "Invalid square root"
+          );
+        }
+
+        result =
+          Math.sqrt(value);
+
         break;
 
       case "square":
-        result = value * value;
+
+        result =
+          value * value;
+
         break;
 
       case "cube":
+
         result =
           value * value * value;
+
         break;
 
       case "inverse":
-        result = 1 / value;
+
+        if (value === 0) {
+          throw new Error(
+            "Division by zero"
+          );
+        }
+
+        result =
+          1 / value;
+
         break;
 
       case "factorial":
+
         calculateFactorial(value);
+
         return;
 
       default:
+
         throw new Error(
           "Unknown function"
         );
@@ -569,27 +1063,36 @@ function special(type) {
       typeof result !== "number" ||
       !Number.isFinite(result)
     ) {
+
       throw new Error(
         "Invalid result"
       );
     }
 
-    const old = current;
+    const old =
+      current;
 
-    current = String(
-      Number(result.toFixed(12))
-    );
+    current =
+      formatNumber(result);
 
     expression.textContent =
-      type + "(" + old + ") =";
+      type +
+      "(" +
+      visibleExpression(old) +
+      ") =";
 
     updateDisplay();
 
     addHistory(
-      type + "(" + old + ")",
+      type +
+      "(" +
+      visibleExpression(old) +
+      ")",
       current
     );
+
   } catch (error) {
+
     current = "Error";
 
     expression.textContent = "";
@@ -598,16 +1101,18 @@ function special(type) {
   }
 }
 
-/* =========================
+/* =========================================================
    FACTORIAL
-   ========================= */
+   ========================================================= */
 
 function calculateFactorial(value) {
+
   if (
     value < 0 ||
     !Number.isInteger(value) ||
     value > 1000
   ) {
+
     throw new Error(
       "Factorial supports integers from 0 to 1000"
     );
@@ -620,166 +1125,117 @@ function calculateFactorial(value) {
     i <= value;
     i++
   ) {
+
     factorial *= BigInt(i);
   }
 
-  const old = current;
+  const old =
+    current;
 
-  current = factorial.toString();
+  current =
+    factorial.toString();
 
   expression.textContent =
-    old + "! =";
+    visibleExpression(old) +
+    "! =";
 
   updateDisplay();
 
   addHistory(
-    old + "!",
+    visibleExpression(old) + "!",
     current
   );
 }
 
-/* =========================
+/* =========================================================
    MEMORY CLEAR
-   ========================= */
+   ========================================================= */
 
 function memoryClear() {
+
   buttonSound();
 
   memory = 0;
 }
 
-/* =========================
+/* =========================================================
    MEMORY ADD
-   ========================= */
+   ========================================================= */
 
 function memoryAdd() {
+
   buttonSound();
 
-  const value = Number(current);
+  try {
 
-  if (Number.isFinite(value)) {
-    memory += value;
+    const value =
+      evaluateExpression(current);
+
+    if (Number.isFinite(value)) {
+      memory += value;
+    }
+
+  } catch (error) {
+    /* Ignore invalid memory input */
   }
 }
 
-/* =========================
+/* =========================================================
    MEMORY SUBTRACT
-   ========================= */
+   ========================================================= */
 
 function memorySubtract() {
+
   buttonSound();
 
-  const value = Number(current);
+  try {
 
-  if (Number.isFinite(value)) {
-    memory -= value;
+    const value =
+      evaluateExpression(current);
+
+    if (Number.isFinite(value)) {
+      memory -= value;
+    }
+
+  } catch (error) {
+    /* Ignore invalid memory input */
   }
 }
 
-/* =========================
+/* =========================================================
    MEMORY RECALL
-   ========================= */
+   ========================================================= */
 
 function memoryRecall() {
+
   buttonSound();
 
-  current = String(memory);
+  current =
+    formatNumber(memory);
 
   updateDisplay();
 }
 
-/* =========================
+/* =========================================================
    TOGGLE SIGN
-   ========================= */
+   ========================================================= */
 
 function toggleSign() {
+
   buttonSound();
 
   if (
     !current ||
-    current === "0" ||
     current === "Error"
   ) {
     return;
   }
 
-  current =
-    current.startsWith("-")
-      ? current.slice(1)
-      : "-" + current;
+  /*
+    If the current value is a
+    simple number, toggle directly.
+  */
 
-  updateDisplay();
-}
-
-/* =========================
-   KEYBOARD SUPPORT
-   ========================= */
-
-document.addEventListener(
-  "keydown",
-  function (event) {
-    const key = event.key;
-
-    /* Numbers */
-
-    if (/^[0-9]$/.test(key)) {
-      press(key);
-      return;
-    }
-
-    /* Operators */
-
-    if (
-      [
-        "+",
-        "-",
-        "*",
-        "/",
-        "(",
-        ")",
-        "."
-      ].includes(key)
-    ) {
-      press(key);
-      return;
-    }
-
-    /* Enter */
-
-    if (
-      key === "Enter" ||
-      key === "="
-    ) {
-      event.preventDefault();
-      calculate();
-      return;
-    }
-
-    /* Backspace */
-
-    if (key === "Backspace") {
-      event.preventDefault();
-      backspace();
-      return;
-    }
-
-    /* Escape */
-
-    if (key === "Escape") {
-      clearAll();
-      return;
-    }
-
-    /* Percentage */
-
-    if (key === "%") {
-      percent();
-    }
-  }
-);
-
-/* =========================
-   INITIALIZE
-   ========================= */
-
-updateDisplay();
+  if (
+    /^-?\d+(?:\.\d+)?$/.test(current)
+ 
