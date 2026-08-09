@@ -1,1427 +1,402 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calcora Calculator - Free Online Calculator</title>
-<meta name="description" content="Calcora is a fast, powerful and premium free online calculator.">
+  <title>Calcora Calculator - Free Online Calculator</title>
 
-<style>
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
--webkit-tap-highlight-color:transparent;
-}
+  <meta
+    name="description"
+    content="Calcora is a fast, powerful and premium free online calculator."
+  >
 
-:root{
---bg:#060811;
---text:#fff;
---muted:#9099b0;
---purple:#7c43e8;
---light:#a86cff;
-}
-
-html{
-scroll-behavior:smooth;
-}
-
-body{
-min-height:100vh;
-color:var(--text);
-font-family:Inter,Arial,Helvetica,sans-serif;
-background:
-radial-gradient(circle at 8% 0%,rgba(74,76,180,.42),transparent 31%),
-radial-gradient(circle at 92% 5%,rgba(145,54,185,.34),transparent 30%),
-radial-gradient(circle at 50% 55%,rgba(83,47,150,.10),transparent 40%),
-var(--bg);
-}
-
-header{
-height:70px;
-padding:0 6%;
-display:flex;
-align-items:center;
-justify-content:space-between;
-position:sticky;
-top:0;
-z-index:50;
-background:rgba(5,7,15,.76);
-border-bottom:1px solid rgba(255,255,255,.08);
-backdrop-filter:blur(22px);
--webkit-backdrop-filter:blur(22px);
-}
-
-.logo{
-font-size:22px;
-font-weight:800;
-letter-spacing:-.8px;
-}
-
-.logo span{
-color:var(--light);
-}
-
-.status{
-padding:9px 14px;
-border-radius:13px;
-color:#dfd3ff;
-font-size:12px;
-font-weight:700;
-background:rgba(124,67,232,.13);
-border:1px solid rgba(168,108,255,.25);
-}
-
-main{
-width:100%;
-max-width:1000px;
-margin:auto;
-padding:42px 12px 75px;
-}
-
-.hero{
-text-align:center;
-margin-bottom:31px;
-}
-
-.badge{
-display:inline-flex;
-align-items:center;
-padding:8px 15px;
-border-radius:999px;
-color:#d9caff;
-font-size:11px;
-font-weight:700;
-background:rgba(124,67,232,.10);
-border:1px solid rgba(168,108,255,.25);
-}
-
-.hero h1{
-margin-top:16px;
-font-size:clamp(42px,8vw,68px);
-line-height:.98;
-letter-spacing:-3px;
-}
-
-.gradient{
-background:linear-gradient(100deg,#fff 5%,#dfd0ff 48%,#965cff);
--webkit-background-clip:text;
-background-clip:text;
-color:transparent;
-}
-
-.hero p{
-max-width:610px;
-margin:17px auto 0;
-color:#969eb4;
-font-size:14px;
-line-height:1.65;
-}
-
-.calculator-wrap{
-width:100%;
-max-width:550px;
-margin:auto;
-}
-
-.calculator{
-padding:14px;
-border-radius:31px;
-background:linear-gradient(
-145deg,
-rgba(45,51,75,.98),
-rgba(9,12,23,.99) 60%,
-rgba(25,30,49,.98)
-);
-border:1px solid rgba(255,255,255,.13);
-box-shadow:
-0 45px 115px rgba(0,0,0,.70),
-0 15px 38px rgba(0,0,0,.42),
-inset 0 1px rgba(255,255,255,.11);
-}
-
-.topbar{
-display:flex;
-align-items:center;
-justify-content:space-between;
-margin-bottom:12px;
-}
-
-.modes{
-display:flex;
-gap:6px;
-}
-
-.modes button,
-.angle{
-border:1px solid rgba(255,255,255,.08);
-color:#aeb6ca;
-background:linear-gradient(180deg,#1d2337,#111625);
-padding:9px 13px;
-border-radius:11px;
-font-size:13px;
-cursor:pointer;
-transition:.15s;
-}
-
-.modes button:active,
-.angle:active{
-transform:scale(.94);
-}
-
-.modes button:hover,
-.angle:hover{
-filter:brightness(1.12);
-}
-
-.modes .active{
-color:#fff;
-background:linear-gradient(180deg,#8c57f5,#6332ca);
-border-color:rgba(205,180,255,.25);
-box-shadow:0 5px 16px rgba(124,67,232,.20);
-}
-
-.display{
-min-height:151px;
-padding:18px;
-margin-bottom:13px;
-border-radius:23px;
-overflow:hidden;
-display:flex;
-flex-direction:column;
-justify-content:flex-end;
-background:
-radial-gradient(circle at 85% 0%,rgba(125,80,230,.15),transparent 35%),
-linear-gradient(145deg,#050810,#0d1220);
-border:1px solid rgba(255,255,255,.07);
-box-shadow:
-inset 0 3px 24px rgba(0,0,0,.62),
-inset 0 -1px rgba(255,255,255,.03);
-}
-
-.expression{
-min-height:23px;
-margin-bottom:4px;
-color:#737d96;
-font-size:14px;
-text-align:right;
-white-space:nowrap;
-overflow-x:auto;
-scrollbar-width:none;
-}
-
-.expression::-webkit-scrollbar{
-display:none;
-}
-
-#display{
-width:100%;
-padding:0;
-border:0;
-outline:0;
-background:transparent;
-color:#fff;
-text-align:right;
-font-family:Inter,Arial,sans-serif;
-font-size:40px;
-font-weight:750;
-letter-spacing:-1.2px;
-overflow:hidden;
-}
-
-.scientific{
-display:none;
-grid-template-columns:repeat(5,1fr);
-gap:7px;
-margin-bottom:10px;
-}
-
-.scientific.show{
-display:grid;
-}
-
-.scientific button{
-height:44px;
-border:1px solid rgba(255,255,255,.06);
-border-radius:12px;
-color:#d5daea;
-background:linear-gradient(180deg,#282f46,#181e31);
-font-size:13px;
-cursor:pointer;
-box-shadow:inset 0 1px rgba(255,255,255,.06);
-transition:.12s;
-}
-
-.scientific button:hover{
-filter:brightness(1.12);
-}
-
-.scientific button:active{
-transform:translateY(3px) scale(.97);
-}
-
-.keys{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:9px;
-}
-
-.key{
-position:relative;
-height:65px;
-border:1px solid rgba(255,255,255,.055);
-border-radius:18px;
-color:#fff;
-font-size:20px;
-font-weight:650;
-background:linear-gradient(
-180deg,
-#343b52,
-#242a3e 48%,
-#191e30
-);
-cursor:pointer;
-user-select:none;
-box-shadow:
-0 7px 0 #090d17,
-0 10px 18px rgba(0,0,0,.36),
-inset 0 1px rgba(255,255,255,.11);
-transition:.075s;
-}
-
-.key:hover{
-filter:brightness(1.12);
-}
-
-.key:active{
-transform:translateY(6px) scale(.975);
-box-shadow:
-0 1px 0 #090d17,
-0 3px 7px rgba(0,0,0,.35),
-inset 0 3px 8px rgba(0,0,0,.28);
-}
-
-.function{
-background:linear-gradient(180deg,#3a4055,#272d40);
-}
-
-.operator{
-background:linear-gradient(
-180deg,
-#985ff7,
-#6d39d5 55%,
-#5425b2
-);
-box-shadow:
-0 7px 0 #351975,
-0 10px 21px rgba(103,54,207,.28),
-inset 0 1px rgba(255,255,255,.22);
-}
-
-.equals{
-background:linear-gradient(
-180deg,
-#b77cff,
-#8549e9 55%,
-#622fc5
-);
-box-shadow:
-0 7px 0 #36187b,
-0 12px 25px rgba(132,70,232,.35),
-inset 0 1px rgba(255,255,255,.26);
-}
-
-.memory{
-font-size:13px;
-}
-
-.history{
-margin-top:19px;
-padding:18px;
-border-radius:22px;
-background:linear-gradient(
-145deg,
-rgba(25,30,50,.88),
-rgba(8,11,21,.88)
-);
-border:1px solid rgba(255,255,255,.08);
-box-shadow:0 15px 35px rgba(0,0,0,.20);
-}
-
-.history-head{
-display:flex;
-align-items:center;
-justify-content:space-between;
-margin-bottom:12px;
-}
-
-.history-head strong{
-font-size:15px;
-}
-
-.history-head button{
-border:0;
-background:none;
-color:#a477ff;
-font-size:13px;
-cursor:pointer;
-}
-
-.history-list{
-max-height:190px;
-overflow:auto;
-}
-
-.history-item{
-padding:11px 13px;
-margin-bottom:7px;
-border-radius:12px;
-background:#090d17;
-border:1px solid rgba(255,255,255,.04);
-color:#adb5c8;
-font-size:13px;
-word-break:break-all;
-}
-
-.features{
-max-width:900px;
-margin:54px auto 0;
-}
-
-.features h2{
-text-align:center;
-font-size:29px;
-margin-bottom:23px;
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:15px;
-}
-
-.card{
-padding:22px;
-border-radius:20px;
-background:linear-gradient(
-145deg,
-rgba(27,32,53,.80),
-rgba(10,14,26,.80)
-);
-border:1px solid rgba(255,255,255,.07);
-transition:.2s;
-}
-
-.card:hover{
-transform:translateY(-4px);
-border-color:rgba(166,108,255,.20);
-}
-
-.card-icon{
-font-size:28px;
-margin-bottom:11px;
-}
-
-.card h3{
-margin-bottom:8px;
-}
-
-.card p{
-color:#8f98ad;
-font-size:13px;
-line-height:1.55;
-}
-
-footer{
-margin-top:60px;
-padding:29px 15px;
-text-align:center;
-border-top:1px solid rgba(255,255,255,.08);
-color:#70798f;
-font-size:13px;
-}
-
-@media(max-width:600px){
-
-header{
-padding:0 14px;
-}
-
-.logo{
-font-size:19px;
-}
-
-main{
-padding:29px 8px 55px;
-}
-
-.hero h1{
-font-size:43px;
-letter-spacing:-2px;
-}
-
-.hero p{
-font-size:13px;
-padding:0 8px;
-}
-
-.calculator{
-padding:10px;
-border-radius:27px;
-}
-
-.display{
-min-height:133px;
-padding:16px;
-}
-
-#display{
-font-size:33px;
-}
-
-.key{
-height:61px;
-border-radius:16px;
-font-size:18px;
-}
-
-.scientific{
-gap:5px;
-}
-
-.scientific button{
-height:41px;
-font-size:11px;
-}
-
-.cards{
-grid-template-columns:1fr;
-}
-
-.card{
-padding:20px;
-}
-
-}
-
-@media(max-width:360px){
-
-.key{
-height:56px;
-font-size:17px;
-}
-
-.modes button,
-.angle{
-padding:8px 9px;
-font-size:11px;
-}
-
-.display{
-min-height:120px;
-}
-
-#display{
-font-size:29px;
-}
-
-}
-</style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
+  <header>
+    <div class="logo">
+      Calcora <span>Calculator</span>
+    </div>
 
-<div class="logo">
-Calcora <span>Calculator</span>
-</div>
-
-<div class="status">
-⚡ Fast
-</div>
-
-</header>
-
-<main>
-
-<section class="hero">
-
-<div class="badge">
-✦ PREMIUM ONLINE CALCULATOR
-</div>
-
-<h1>
-Calculate <span class="gradient">Smarter.</span>
-</h1>
-
-<p>
-Fast, accurate and powerful calculations with a premium calculator experience.
-</p>
-
-</section>
-
-<div class="calculator-wrap">
-
-<div class="calculator">
-
-<div class="topbar">
-
-<div class="modes">
-
-<button id="standardBtn" class="active" onclick="setMode('standard')">
-Standard
-</button>
-
-<button id="scientificBtn" onclick="setMode('scientific')">
-Scientific
-</button>
-
-</div>
-
-<button class="angle" id="angleBtn" onclick="toggleAngle()">
-DEG
-</button>
-
-</div>
-
-<div class="display">
-
-<div id="expression" class="expression"></div>
-
-<input
-id="display"
-value="0"
-readonly
-aria-label="Calculator display"
->
-
-</div>
-
-<div id="scientific" class="scientific">
-
-<button onclick="special('sin')">sin</button>
-<button onclick="special('cos')">cos</button>
-<button onclick="special('tan')">tan</button>
-<button onclick="special('log')">log</button>
-<button onclick="special('ln')">ln</button>
-
-<button onclick="special('sqrt')">√</button>
-<button onclick="special('square')">x²</button>
-<button onclick="special('cube')">x³</button>
-<button onclick="special('pi')">π</button>
-<button onclick="special('e')">e</button>
-
-<button onclick="special('inverse')">1/x</button>
-<button onclick="special('factorial')">x!</button>
-<button onclick="press('**')">xʸ</button>
-<button onclick="press('(')">(</button>
-<button onclick="press(')')">)</button>
-
-</div>
-
-<div class="keys">
-
-<button class="key function" onclick="clearAll()">AC</button>
-<button class="key function" onclick="backspace()">⌫</button>
-<button class="key function" onclick="percent()">%</button>
-<button class="key operator" onclick="press('/')">÷</button>
-
-<button class="key" onclick="press('7')">7</button>
-<button class="key" onclick="press('8')">8</button>
-<button class="key" onclick="press('9')">9</button>
-<button class="key operator" onclick="press('*')">×</button>
-
-<button class="key" onclick="press('4')">4</button>
-<button class="key" onclick="press('5')">5</button>
-<button class="key" onclick="press('6')">6</button>
-<button class="key operator" onclick="press('-')">−</button>
-
-<button class="key" onclick="press('1')">1</button>
-<button class="key" onclick="press('2')">2</button>
-<button class="key" onclick="press('3')">3</button>
-<button class="key operator" onclick="press('+')">+</button>
-
-<button class="key memory" onclick="memoryClear()">MC</button>
-<button class="key" onclick="press('0')">0</button>
-<button class="key" onclick="press('.')">.</button>
-<button class="key equals" onclick="calculate()">=</button>
-
-<button class="key memory" onclick="memoryAdd()">M+</button>
-<button class="key memory" onclick="memorySubtract()">M−</button>
-<button class="key memory" onclick="memoryRecall()">MR</button>
-<button class="key function" onclick="toggleSign()">±</button>
-
-</div>
-
-</div>
-
-<div class="history">
-
-<div class="history-head">
-
-<strong>
-Calculation History
-</strong>
-
-<button onclick="clearHistory()">
-Clear
-</button>
-
-</div>
-
-<div id="historyList" class="history-list">
-
-<div class="history-item">
-Your calculations will appear here.
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<section class="features">
-
-<h2>
-Why Calcora?
-</h2>
-
-<div class="cards">
-
-<div class="card">
-
-<div class="card-icon">∞</div>
-
-<h3>
-Huge Numbers
-</h3>
-
-<p>
-Large integer calculations are handled with BigInt technology.
-</p>
-
-</div>
-
-<div class="card">
-
-<div class="card-icon">🔬</div>
-
-<h3>
-Scientific Mode
-</h3>
-
-<p>
-Trigonometry, logarithms, powers, roots and more.
-</p>
-
-</div>
-
-<div class="card">
-
-<div class="card-icon">📱</div>
-
-<h3>
-Mobile Ready
-</h3>
-
-<p>
-Premium responsive design for phones, tablets and desktops.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-<footer>
-© 2026 Calcora Calculator • Free Online Calculator
-</footer>
-
-<script>
-let current="";
-let memory=0;
-let angleMode="DEG";
-
-const display=document.getElementById("display");
-const expression=document.getElementById("expression");
-const historyList=document.getElementById("historyList");
-
-let audioContext=null;
-
-function update(){
-display.value=current||"0";
-}
-
-function buttonSound(){
-
-try{
-
-const Audio=window.AudioContext||window.webkitAudioContext;
-
-if(!Audio)return;
-
-if(!audioContext){
-audioContext=new Audio();
-}
-
-audioContext.resume();
-
-const oscillator=audioContext.createOscillator();
-const gain=audioContext.createGain();
-
-oscillator.type="sine";
-oscillator.frequency.value=620;
-
-gain.gain.setValueAtTime(
-0.045,
-audioContext.currentTime
-);
-
-gain.gain.exponentialRampToValueAtTime(
-0.001,
-audioContext.currentTime+0.055
-);
-
-oscillator.connect(gain);
-gain.connect(audioContext.destination);
-
-oscillator.start();
-oscillator.stop(
-audioContext.currentTime+0.06
-);
-
-}catch(e){}
-}
-
-function press(value){
-
-buttonSound();
-
-if(current==="Error"){
-current="";
-}
-
-current+=value;
-
-update();
-}
-
-function clearAll(){
-
-buttonSound();
-
-current="";
-expression.textContent="";
-
-update();
-}
-
-function backspace(){
-
-buttonSound();
-
-if(current==="Error"){
-current="";
-}else{
-current=current.slice(0,-1);
-}
-
-update();
-}
-
-function percent(){
-
-buttonSound();
-
-if(!current)return;
-
-try{
-
-const value=Number(current);
-
-if(!Number.isFinite(value)){
-throw new Error();
-}
-
-current=String(value/100);
-
-update();
-
-}catch(e){
-
-current="Error";
-update();
-
-}
-}
-
-function tokenize(input){
-
-const tokens=input.match(
-/\d+(?:\.\d+)?|[()+\-*/]|\*\*/g
-);
-
-if(!tokens){
-throw new Error();
-}
-
-return tokens;
-}
-
-function calculateBigInteger(input){
-
-const tokens=input.match(
-/\d+|[()+\-*]/g
-);
-
-if(!tokens){
-throw new Error();
-}
-
-let position=0;
-
-function expressionParser(){
-
-let result=termParser();
-
-while(
-position<tokens.length &&
-(tokens[position]==="+"||tokens[position]==="-")
-){
-
-const operator=tokens[position++];
-const value=termParser();
-
-result=
-operator==="+"?
-result+value:
-result-value;
-
-}
-
-return result;
-}
-
-function termParser(){
-
-let result=factorParser();
-
-while(
-position<tokens.length &&
-tokens[position]==="*"
-){
-
-position++;
-
-result*=factorParser();
-
-}
-
-return result;
-}
-
-function factorParser(){
-
-if(position>=tokens.length){
-throw new Error();
-}
-
-const token=tokens[position];
-
-if(token==="-"){
-position++;
-return -factorParser();
-}
-
-if(token==="+"){
-position++;
-return factorParser();
-}
-
-if(token==="("){
-
-position++;
-
-const result=expressionParser();
-
-if(tokens[position]!==")"){
-throw new Error();
-}
-
-position++;
-
-return result;
-}
-
-if(/^\d+$/.test(token)){
-
-position++;
-
-return BigInt(token);
-
-}
-
-throw new Error();
-}
-
-const result=expressionParser();
-
-if(position!==tokens.length){
-throw new Error();
-}
-
-return result;
-}
-
-function isBigIntegerExpression(input){
-
-return /^[0-9+\-*()\s]+$/.test(input)&&
-!input.includes("/")&&
-!input.includes(".");
-
-}
-
-function calculateNormal(input){
-
-const safe=input.replace(
-/[^0-9+\-*/().]/g,
-""
-);
-
-if(!safe){
-throw new Error();
-}
-
-const result=Function(
-'"use strict";return ('+safe+')'
-)();
-
-if(
-typeof result!=="number"||
-!Number.isFinite(result)
-){
-
-throw new Error();
-
-}
-
-return String(
-Number(result.toFixed(12))
-);
-
-}
-
-function visibleExpression(value){
-
-return String(value)
-.replace(/\*\*/g,"^")
-.replace(/\*/g,"×")
-.replace(/\//g,"÷");
-
-}
-
-function calculate(){
-
-buttonSound();
-
-if(!current)return;
-
-try{
-
-const old=current.trim();
-
-if(isBigIntegerExpression(old)){
-
-current=
-calculateBigInteger(old).toString();
-
-}else{
-
-current=
-calculateNormal(old);
-
-}
-
-expression.textContent=
-visibleExpression(old)+" =";
-
-update();
-
-addHistory(
-visibleExpression(old),
-current
-);
-
-}catch(e){
-
-current="Error";
-expression.textContent="";
-update();
-
-}
-
-}
-
-function addHistory(a,b){
-
-const first=
-historyList.querySelector(".history-item");
-
-if(
-first&&
-first.textContent.includes(
-"Your calculations"
-)
-){
-
-historyList.innerHTML="";
-
-}
-
-const item=
-document.createElement("div");
-
-item.className="history-item";
-
-item.textContent=
-a+" = "+b;
-
-historyList.prepend(item);
-
-}
-
-function clearHistory(){
-
-buttonSound();
-
-historyList.innerHTML=
-'<div class="history-item">Your calculations will appear here.</div>';
-
-}
-
-function setMode(mode){
-
-buttonSound();
-
-const scientific=
-document.getElementById("scientific");
-
-const standardButton=
-document.getElementById("standardBtn");
-
-const scientificButton=
-document.getElementById("scientificBtn");
-
-if(mode==="scientific"){
-
-scientific.classList.add("show");
-
-standardButton.classList.remove("active");
-
-scientificButton.classList.add("active");
-
-}else{
-
-scientific.classList.remove("show");
-
-standardButton.classList.add("active");
-
-scientificButton.classList.remove("active");
-
-}
-
-}
-
-function toggleAngle(){
-
-buttonSound();
-
-angleMode=
-angleMode==="DEG"?
-"RAD":
-"DEG";
-
-document.getElementById(
-"angleBtn"
-).textContent=angleMode;
-
-}
-
-function radians(value){
-
-return angleMode==="DEG"?
-value*Math.PI/180:
-value;
-
-}
-
-function special(type){
-
-buttonSound();
-
-try{
-
-if(type==="pi"){
-
-press(String(Math.PI));
-return;
-
-}
-
-if(type==="e"){
-
-press(String(Math.E));
-return;
-
-}
-
-const value=Number(current);
-
-if(!Number.isFinite(value)){
-throw new Error();
-}
-
-let result;
-
-if(type==="sin"){
-result=Math.sin(radians(value));
-}
-
-if(type==="cos"){
-result=Math.cos(radians(value));
-}
-
-if(type==="tan"){
-result=Math.tan(radians(value));
-}
-
-if(type==="log"){
-result=Math.log10(value);
-}
-
-if(type==="ln"){
-result=Math.log(value);
-}
-
-if(type==="sqrt"){
-result=Math.sqrt(value);
-}
-
-if(type==="square"){
-result=value*value;
-}
-
-if(type==="cube"){
-result=value*value*value;
-}
-
-if(type==="inverse"){
-result=1/value;
-}
-
-if(type==="factorial"){
-
-if(
-value<0||
-!Number.isInteger(value)||
-value>1000
-){
-
-throw new Error();
-
-}
-
-let factorial=1n;
-
-for(
-let i=2;
-i<=value;
-i++
-){
-
-factorial*=BigInt(i);
-
-}
-
-const old=current;
-
-current=factorial.toString();
-
-expression.textContent=
-old+"! =";
-
-update();
-
-addHistory(
-old+"!",
-current
-);
-
-return;
-
-}
-
-if(
-typeof result!=="number"||
-!Number.isFinite(result)
-){
-
-throw new Error();
-
-}
-
-const old=current;
-
-current=String(
-Number(result.toFixed(12))
-);
-
-expression.textContent=
-type+"("+old+") =";
-
-update();
-
-addHistory(
-type+"("+old+")",
-current
-);
-
-}catch(e){
-
-current="Error";
-update();
-
-}
-
-}
-
-function memoryClear(){
-
-buttonSound();
-
-memory=0;
-
-}
-
-function memoryAdd(){
-
-buttonSound();
-
-const value=Number(current);
-
-if(Number.isFinite(value)){
-memory+=value;
-}
-
-}
-
-function memorySubtract(){
-
-buttonSound();
-
-const value=Number(current);
-
-if(Number.isFinite(value)){
-memory-=value;
-}
-
-}
-
-function memoryRecall(){
-
-buttonSound();
-
-current=String(memory);
-
-update();
-
-}
-
-function toggleSign(){
-
-buttonSound();
-
-if(
-!current||
-current==="0"||
-current==="Error"
-){
-
-return;
-
-}
-
-current=
-current.startsWith("-")?
-current.slice(1):
-"-"+current;
-
-update();
-
-}
-
-document.addEventListener(
-"keydown",
-function(event){
-
-const key=event.key;
-
-if(/^[0-9]$/.test(key)){
-
-press(key);
-return;
-
-}
-
-if(
-["+","-","*","/","(",")","."]
-.includes(key)
-){
-
-press(key);
-return;
-
-}
-
-if(key==="Enter"||key==="="){
-
-calculate();
-return;
-
-}
-
-if(key==="Backspace"){
-
-backspace();
-return;
-
-}
-
-if(key==="Escape"){
-
-clearAll();
-return;
-
-}
-
-if(key==="%"){
-
-percent();
-return;
-
-}
-
-}
-);
-
-update();
-</script>
+    <div class="status">
+      ⚡ Fast
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+
+      <div class="badge">
+        ✦ PREMIUM ONLINE CALCULATOR
+      </div>
+
+      <h1>
+        Calculate <span class="gradient">Smarter.</span>
+      </h1>
+
+      <p>
+        Fast, accurate and powerful calculations with a premium calculator experience.
+      </p>
+
+    </section>
+
+    <div class="calculator-wrap">
+
+      <div class="calculator">
+
+        <div class="topbar">
+
+          <div class="modes">
+
+            <button
+              id="standardBtn"
+              class="active"
+              onclick="setMode('standard')"
+            >
+              Standard
+            </button>
+
+            <button
+              id="scientificBtn"
+              onclick="setMode('scientific')"
+            >
+              Scientific
+            </button>
+
+          </div>
+
+          <button
+            class="angle"
+            id="angleBtn"
+            onclick="toggleAngle()"
+          >
+            DEG
+          </button>
+
+        </div>
+
+        <div class="display">
+
+          <div
+            id="expression"
+            class="expression"
+          ></div>
+
+          <input
+            id="display"
+            value="0"
+            readonly
+            aria-label="Calculator display"
+          >
+
+        </div>
+
+        <div
+          id="scientific"
+          class="scientific"
+        >
+
+          <button onclick="special('sin')">sin</button>
+          <button onclick="special('cos')">cos</button>
+          <button onclick="special('tan')">tan</button>
+          <button onclick="special('log')">log</button>
+          <button onclick="special('ln')">ln</button>
+
+          <button onclick="special('sqrt')">√</button>
+          <button onclick="special('square')">x²</button>
+          <button onclick="special('cube')">x³</button>
+          <button onclick="special('pi')">π</button>
+          <button onclick="special('e')">e</button>
+
+          <button onclick="special('inverse')">1/x</button>
+          <button onclick="special('factorial')">x!</button>
+          <button onclick="press('**')">xʸ</button>
+          <button onclick="press('(')">(</button>
+          <button onclick="press(')')">)</button>
+
+        </div>
+
+        <div class="keys">
+
+          <button
+            class="key function"
+            onclick="clearAll()"
+          >
+            AC
+          </button>
+
+          <button
+            class="key function"
+            onclick="backspace()"
+          >
+            ⌫
+          </button>
+
+          <button
+            class="key function"
+            onclick="percent()"
+          >
+            %
+          </button>
+
+          <button
+            class="key operator"
+            onclick="press('/')"
+          >
+            ÷
+          </button>
+
+
+          <button
+            class="key"
+            onclick="press('7')"
+          >
+            7
+          </button>
+
+          <button
+            class="key"
+            onclick="press('8')"
+          >
+            8
+          </button>
+
+          <button
+            class="key"
+            onclick="press('9')"
+          >
+            9
+          </button>
+
+          <button
+            class="key operator"
+            onclick="press('*')"
+          >
+            ×
+          </button>
+
+
+          <button
+            class="key"
+            onclick="press('4')"
+          >
+            4
+          </button>
+
+          <button
+            class="key"
+            onclick="press('5')"
+          >
+            5
+          </button>
+
+          <button
+            class="key"
+            onclick="press('6')"
+          >
+            6
+          </button>
+
+          <button
+            class="key operator"
+            onclick="press('-')"
+          >
+            −
+          </button>
+
+
+          <button
+            class="key"
+            onclick="press('1')"
+          >
+            1
+          </button>
+
+          <button
+            class="key"
+            onclick="press('2')"
+          >
+            2
+          </button>
+
+          <button
+            class="key"
+            onclick="press('3')"
+          >
+            3
+          </button>
+
+          <button
+            class="key operator"
+            onclick="press('+')"
+          >
+            +
+          </button>
+
+
+          <button
+            class="key memory"
+            onclick="memoryClear()"
+          >
+            MC
+          </button>
+
+          <button
+            class="key"
+            onclick="press('0')"
+          >
+            0
+          </button>
+
+          <button
+            class="key"
+            onclick="press('.')"
+          >
+            .
+          </button>
+
+          <button
+            class="key equals"
+            onclick="calculate()"
+          >
+            =
+          </button>
+
+
+          <button
+            class="key memory"
+            onclick="memoryAdd()"
+          >
+            M+
+          </button>
+
+          <button
+            class="key memory"
+            onclick="memorySubtract()"
+          >
+            M−
+          </button>
+
+          <button
+            class="key memory"
+            onclick="memoryRecall()"
+          >
+            MR
+          </button>
+
+          <button
+            class="key function"
+            onclick="toggleSign()"
+          >
+            ±
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="history">
+
+        <div class="history-head">
+
+          <strong>
+            Calculation History
+          </strong>
+
+          <button onclick="clearHistory()">
+            Clear
+          </button>
+
+        </div>
+
+        <div
+          id="historyList"
+          class="history-list"
+        >
+
+          <div class="history-item">
+            Your calculations will appear here.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <section class="features">
+
+      <h2>
+        Why Calcora?
+      </h2>
+
+      <div class="cards">
+
+        <div class="card">
+
+          <div class="card-icon">
+            ∞
+          </div>
+
+          <h3>
+            Huge Numbers
+          </h3>
+
+          <p>
+            Large integer calculations are handled with BigInt technology.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="card-icon">
+            🔬
+          </div>
+
+          <h3>
+            Scientific Mode
+          </h3>
+
+          <p>
+            Trigonometry, logarithms, powers, roots and more.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="card-icon">
+            📱
+          </div>
+
+          <h3>
+            Mobile Ready
+          </h3>
+
+          <p>
+            Premium responsive design for phones, tablets and desktops.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Calcora Calculator • Free Online Calculator
+  </footer>
+
+  <script src="script.js"></script>
 
 </body>
 </html>
