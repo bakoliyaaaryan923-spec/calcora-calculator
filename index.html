@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>Calcora Calculator</title>
-<meta name="description" content="Calcora is a fast, powerful and free online calculator.">
+<title>Calcora Calculator – Free Online Calculator</title>
+<meta name="description" content="Calcora is a fast, powerful and free online calculator for everyday and scientific calculations.">
 
 <style>
 *{
@@ -17,11 +17,11 @@
 body{
   font-family:Arial,Helvetica,sans-serif;
   min-height:100vh;
+  color:#fff;
   background:
-    radial-gradient(circle at 20% 0%,#26366d 0,transparent 32%),
-    radial-gradient(circle at 90% 20%,#51245f 0,transparent 30%),
+    radial-gradient(circle at 15% 0%,#29386f 0,transparent 32%),
+    radial-gradient(circle at 90% 15%,#542563 0,transparent 30%),
     #080a12;
-  color:white;
 }
 
 header{
@@ -31,7 +31,7 @@ header{
   justify-content:space-between;
   padding:0 6%;
   border-bottom:1px solid rgba(255,255,255,.08);
-  background:rgba(8,10,18,.75);
+  background:rgba(8,10,18,.78);
   backdrop-filter:blur(18px);
 }
 
@@ -151,8 +151,7 @@ main{
   font-size:14px;
   text-align:right;
   white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  overflow:auto;
 }
 
 #display{
@@ -162,7 +161,7 @@ main{
   background:transparent;
   color:white;
   text-align:right;
-  font-size:42px;
+  font-size:38px;
   font-weight:700;
 }
 
@@ -218,7 +217,6 @@ main{
 
 .function{
   background:#292f42;
-  color:#d8dce7;
 }
 
 .operator{
@@ -227,7 +225,6 @@ main{
 
 .equals{
   background:linear-gradient(145deg,#a36aff,#6532d8);
-  box-shadow:0 8px 22px rgba(132,70,235,.25);
 }
 
 .memory{
@@ -342,7 +339,7 @@ footer{
   }
 
   #display{
-    font-size:34px;
+    font-size:32px;
   }
 
   .key{
@@ -354,7 +351,6 @@ footer{
   .cards{
     grid-template-columns:1fr;
   }
-
 }
 </style>
 </head>
@@ -365,10 +361,7 @@ footer{
   <div class="logo">
     Calcora <span>Calculator</span>
   </div>
-
-  <div class="status">
-    ⚡ Fast
-  </div>
+  <div class="status">⚡ Fast</div>
 </header>
 
 <main>
@@ -424,10 +417,7 @@ footer{
 
 <div class="display">
 
-  <div
-    id="expression"
-    class="expression">
-  </div>
+  <div id="expression" class="expression"></div>
 
   <input
     id="display"
@@ -437,9 +427,7 @@ footer{
 </div>
 
 
-<div
-  id="scientific"
-  class="scientific">
+<div id="scientific" class="scientific">
 
   <button onclick="special('sin')">sin</button>
   <button onclick="special('cos')">cos</button>
@@ -502,20 +490,14 @@ footer{
 <div class="history">
 
 <div class="history-head">
-
-<strong>
-Calculation History
-</strong>
+<strong>Calculation History</strong>
 
 <button onclick="clearHistory()">
 Clear
 </button>
-
 </div>
 
-<div
-id="historyList"
-class="history-list">
+<div id="historyList" class="history-list">
 
 <div class="history-item">
 Your calculations will appear here.
@@ -533,11 +515,11 @@ Your calculations will appear here.
 <div class="cards">
 
 <div class="card">
-<div class="card-icon">🔢</div>
+<div class="card-icon">∞</div>
 <h3>Huge Numbers</h3>
 <p>
-Supports extremely large integer calculations
-with BigInt technology.
+Calculate extremely large integer results
+without ordinary JavaScript number limits.
 </p>
 </div>
 
@@ -545,8 +527,8 @@ with BigInt technology.
 <div class="card-icon">🔬</div>
 <h3>Scientific Mode</h3>
 <p>
-Trigonometry, logarithms, powers, roots and
-more advanced functions.
+Trigonometry, logarithms, powers, roots
+and advanced functions.
 </p>
 </div>
 
@@ -554,8 +536,8 @@ more advanced functions.
 <div class="card-icon">📱</div>
 <h3>Mobile Ready</h3>
 <p>
-Designed to feel like a modern mobile
-calculator on every device.
+A modern calculator interface designed
+for phones, tablets and desktops.
 </p>
 </div>
 
@@ -573,9 +555,9 @@ calculator on every device.
 
 <script>
 
-/* ==============================
-   CALCORA CALCULATOR ENGINE
-============================== */
+/* =========================
+   VARIABLES
+========================= */
 
 let current = "";
 let memory = 0;
@@ -591,9 +573,9 @@ const historyList =
 document.getElementById("historyList");
 
 
-/* ==============================
-   CALCULATOR SOUND
-============================== */
+/* =========================
+   BUTTON SOUND
+========================= */
 
 let audioContext = null;
 
@@ -632,7 +614,7 @@ function buttonSound(){
     );
 
     gain.gain.setValueAtTime(
-      0.055,
+      0.05,
       audioContext.currentTime
     );
 
@@ -655,9 +637,9 @@ function buttonSound(){
 }
 
 
-/* ==============================
+/* =========================
    DISPLAY
-============================== */
+========================= */
 
 function update(){
 
@@ -667,9 +649,39 @@ function update(){
 }
 
 
-/* ==============================
-   INPUT
-============================== */
+/* =========================
+   REMOVE TRAILING OPERATORS
+========================= */
+
+function cleanExpression(value){
+
+  let result =
+  value.trim();
+
+  /*
+    If user enters:
+
+    5*5*5*
+
+    automatically becomes:
+
+    5*5*5
+  */
+
+  result =
+  result.replace(
+    /[+\-*/]+$/,
+    ""
+  );
+
+  return result;
+
+}
+
+
+/* =========================
+   PRESS
+========================= */
 
 function press(value){
 
@@ -686,9 +698,9 @@ function press(value){
 }
 
 
-/* ==============================
+/* =========================
    CLEAR
-============================== */
+========================= */
 
 function clearAll(){
 
@@ -702,9 +714,9 @@ function clearAll(){
 }
 
 
-/* ==============================
+/* =========================
    BACKSPACE
-============================== */
+========================= */
 
 function backspace(){
 
@@ -722,9 +734,9 @@ function backspace(){
 }
 
 
-/* ==============================
+/* =========================
    PERCENT
-============================== */
+========================= */
 
 function percent(){
 
@@ -756,9 +768,9 @@ function percent(){
 }
 
 
-/* ==============================
-   BIG INTEGER CALCULATOR
-============================== */
+/* =========================
+   INTEGER EXPRESSION CHECK
+========================= */
 
 function isIntegerExpression(value){
 
@@ -773,6 +785,10 @@ function isIntegerExpression(value){
 }
 
 
+/* =========================
+   BIGINT PARSER
+========================= */
+
 function bigIntegerCalculate(value){
 
   const tokens =
@@ -785,10 +801,10 @@ function bigIntegerCalculate(value){
   let position = 0;
 
 
-  function expressionParser(){
+  function parseExpression(){
 
     let result =
-    termParser();
+    parseTerm();
 
     while(
       position < tokens.length &&
@@ -802,7 +818,7 @@ function bigIntegerCalculate(value){
       tokens[position++];
 
       const right =
-      termParser();
+      parseTerm();
 
       if(operator === "+"){
         result += right;
@@ -817,10 +833,10 @@ function bigIntegerCalculate(value){
   }
 
 
-  function termParser(){
+  function parseTerm(){
 
     let result =
-    factorParser();
+    parseFactor();
 
     while(
       position < tokens.length &&
@@ -830,7 +846,7 @@ function bigIntegerCalculate(value){
       position++;
 
       result *=
-      factorParser();
+      parseFactor();
 
     }
 
@@ -839,7 +855,7 @@ function bigIntegerCalculate(value){
   }
 
 
-  function factorParser(){
+  function parseFactor(){
 
     if(position >= tokens.length){
       throw new Error();
@@ -854,7 +870,7 @@ function bigIntegerCalculate(value){
       position++;
 
       const result =
-      expressionParser();
+      parseExpression();
 
       if(tokens[position] !== ")"){
         throw new Error();
@@ -871,7 +887,7 @@ function bigIntegerCalculate(value){
 
       position++;
 
-      return -factorParser();
+      return -parseFactor();
 
     }
 
@@ -884,26 +900,29 @@ function bigIntegerCalculate(value){
 
     }
 
+
     throw new Error();
 
   }
 
 
   const result =
-  expressionParser();
+  parseExpression();
+
 
   if(position !== tokens.length){
     throw new Error();
   }
+
 
   return result;
 
 }
 
 
-/* ==============================
+/* =========================
    NORMAL NUMBER FORMAT
-============================== */
+========================= */
 
 function formatNumber(value){
 
@@ -911,17 +930,16 @@ function formatNumber(value){
     throw new Error();
   }
 
-  const rounded =
-  Number(value.toPrecision(15));
-
-  return String(rounded);
+  return String(
+    Number(value.toPrecision(15))
+  );
 
 }
 
 
-/* ==============================
+/* =========================
    CALCULATE
-============================== */
+========================= */
 
 function calculate(){
 
@@ -931,9 +949,35 @@ function calculate(){
 
   try{
 
-    const old =
+    /*
+      First remove accidental
+      trailing operators.
+    */
+
+    const original =
     current.trim();
 
+    const old =
+    cleanExpression(original);
+
+
+    if(!old){
+      current = "";
+      update();
+      return;
+    }
+
+
+    /*
+      BIG INTEGER MODE
+
+      Example:
+
+      5*5*5*5*5*5*...
+
+      Hundreds of integers can
+      be processed here.
+    */
 
     if(isIntegerExpression(old)){
 
@@ -944,7 +988,9 @@ function calculate(){
       result.toString();
 
       expression.textContent =
-      old + " =";
+      original === old
+      ? old + " ="
+      : original + " → " + old + " =";
 
       update();
 
@@ -957,6 +1003,10 @@ function calculate(){
 
     }
 
+
+    /*
+      NORMAL DECIMAL MODE
+    */
 
     const safe =
     old.replace(
@@ -987,7 +1037,9 @@ function calculate(){
     formatNumber(result);
 
     expression.textContent =
-    old + " =";
+    original === old
+    ? old + " ="
+    : original + " → " + old + " =";
 
     update();
 
@@ -1009,9 +1061,9 @@ function calculate(){
 }
 
 
-/* ==============================
+/* =========================
    HISTORY
-============================== */
+========================= */
 
 function addHistory(a,b){
 
@@ -1059,9 +1111,9 @@ function clearHistory(){
 }
 
 
-/* ==============================
+/* =========================
    MODE
-============================== */
+========================= */
 
 function setMode(mode){
 
@@ -1097,9 +1149,9 @@ function setMode(mode){
 }
 
 
-/* ==============================
+/* =========================
    DEG / RAD
-============================== */
+========================= */
 
 function toggleAngle(){
 
@@ -1127,9 +1179,9 @@ function radians(x){
 }
 
 
-/* ==============================
+/* =========================
    SCIENTIFIC
-============================== */
+========================= */
 
 function special(type){
 
@@ -1138,14 +1190,20 @@ function special(type){
   try{
 
     if(type === "pi"){
-      current += String(Math.PI);
+
+      current +=
+      String(Math.PI);
+
       update();
       return;
     }
 
 
     if(type === "e"){
-      current += String(Math.E);
+
+      current +=
+      String(Math.E);
+
       update();
       return;
     }
@@ -1193,17 +1251,17 @@ function special(type){
 
     if(type === "square")
       result =
-      x*x;
+      x * x;
 
 
     if(type === "cube")
       result =
-      x*x*x;
+      x * x * x;
 
 
     if(type === "inverse")
       result =
-      1/x;
+      1 / x;
 
 
     if(type === "factorial"){
@@ -1219,11 +1277,13 @@ function special(type){
       result = 1;
 
       for(
-        let i=2;
-        i<=x;
+        let i = 2;
+        i <= x;
         i++
       ){
+
         result *= i;
+
       }
 
     }
@@ -1234,7 +1294,8 @@ function special(type){
     }
 
 
-    const old = current;
+    const old =
+    current;
 
     current =
     formatNumber(result);
@@ -1261,9 +1322,9 @@ function special(type){
 }
 
 
-/* ==============================
+/* =========================
    MEMORY
-============================== */
+========================= */
 
 function memoryClear(){
 
@@ -1307,16 +1368,16 @@ function memoryRecall(){
   buttonSound();
 
   current =
-  formatNumber(memory);
+  String(memory);
 
   update();
 
 }
 
 
-/* ==============================
+/* =========================
    SIGN
-============================== */
+========================= */
 
 function toggleSign(){
 
@@ -1339,47 +1400,39 @@ function toggleSign(){
 }
 
 
-/* ==============================
+/* =========================
    KEYBOARD
-============================== */
+========================= */
 
 document.addEventListener(
-"keydown",
-function(e){
+  "keydown",
+  function(e){
 
-  if(
-    "0123456789.+-*/()"
-    .includes(e.key)
-  ){
-    press(e.key);
-  }
+    if(
+      "0123456789.+-*/()"
+      .includes(e.key)
+    ){
 
+      press(e.key);
 
-  if(
-    e.key === "Enter" ||
-    e.key === "="
-  ){
-    calculate();
-  }
+    }
 
 
-  if(e.key === "Backspace"){
-    backspace();
-  }
+    if(
+      e.key === "Enter" ||
+      e.key === "="
+    ){
+
+      calculate();
+
+    }
 
 
-  if(e.key === "Escape"){
-    clearAll();
-  }
-
-});
+    if(e.key === "Backspace"){
+      backspace();
+    }
 
 
-/* INITIAL */
-
-update();
-
-</script>
-
-</body>
-</html>
+    if(e.key === "Escape"){
+      clearAll();
+  
