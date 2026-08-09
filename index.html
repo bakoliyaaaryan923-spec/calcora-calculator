@@ -5,39 +5,58 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>Calcora Calculator – Free Online Calculator</title>
-<meta name="description" content="Calcora is a fast, powerful and free online calculator for everyday and scientific calculations.">
+<meta name="description" content="Calcora is a fast, powerful and beautiful free online calculator.">
 
 <style>
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+  --bg:#070912;
+  --panel:#151a2a;
+  --panel2:#0c101c;
+  --key:#20263a;
+  --key-top:#303850;
+  --purple:#7c48ef;
+  --purple2:#a66cff;
+  --text:#ffffff;
+  --muted:#8d96ad;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
   min-height:100vh;
-  color:#fff;
+  color:var(--text);
+  font-family:Inter,Arial,Helvetica,sans-serif;
   background:
-    radial-gradient(circle at 15% 0%,#29386f 0,transparent 32%),
-    radial-gradient(circle at 90% 15%,#542563 0,transparent 30%),
-    #080a12;
+    radial-gradient(circle at 15% -5%,rgba(93,79,190,.42),transparent 32%),
+    radial-gradient(circle at 90% 10%,rgba(139,55,175,.30),transparent 30%),
+    radial-gradient(circle at 50% 100%,rgba(60,65,140,.15),transparent 35%),
+    #070912;
 }
 
+/* HEADER */
+
 header{
-  height:68px;
+  height:70px;
+  padding:0 6%;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 6%;
   border-bottom:1px solid rgba(255,255,255,.08);
-  background:rgba(8,10,18,.78);
-  backdrop-filter:blur(18px);
+  background:rgba(5,7,14,.68);
+  backdrop-filter:blur(22px);
+  position:relative;
+  z-index:10;
 }
 
 .logo{
   font-size:22px;
-  font-weight:800;
+  font-weight:850;
+  letter-spacing:-.7px;
 }
 
 .logo span{
@@ -45,71 +64,119 @@ header{
 }
 
 .status{
-  padding:9px 13px;
-  border-radius:12px;
-  background:#171b2b;
-  border:1px solid rgba(255,255,255,.1);
-  font-size:13px;
+  padding:9px 14px;
+  border-radius:13px;
+  color:#d7c9ff;
+  font-size:12px;
+  background:rgba(124,72,239,.12);
+  border:1px solid rgba(166,108,255,.22);
+  box-shadow:inset 0 1px rgba(255,255,255,.06);
 }
 
+/* MAIN */
+
 main{
-  max-width:900px;
+  max-width:950px;
   margin:auto;
-  padding:30px 12px 60px;
+  padding:38px 12px 70px;
 }
 
 .hero{
   text-align:center;
-  margin-bottom:25px;
+  margin-bottom:28px;
 }
 
 .badge{
-  display:inline-block;
-  padding:7px 13px;
-  border-radius:30px;
-  background:rgba(139,92,246,.12);
-  border:1px solid rgba(139,92,246,.3);
-  color:#cdb8ff;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 14px;
+  border-radius:999px;
+  color:#d5c5ff;
   font-size:12px;
-  margin-bottom:13px;
+  background:rgba(124,72,239,.10);
+  border:1px solid rgba(166,108,255,.25);
+  box-shadow:0 0 30px rgba(124,72,239,.08);
 }
 
 .hero h1{
-  font-size:clamp(38px,8vw,62px);
-  line-height:1;
-  margin-bottom:12px;
+  margin-top:15px;
+  font-size:clamp(40px,8vw,66px);
+  line-height:.98;
+  letter-spacing:-2.5px;
 }
 
 .gradient{
-  background:linear-gradient(90deg,#fff,#a76bff);
+  background:linear-gradient(
+    100deg,
+    #fff 20%,
+    #d4c0ff 55%,
+    #9a62ff
+  );
   -webkit-background-clip:text;
+  background-clip:text;
   color:transparent;
 }
 
 .hero p{
-  color:#969db2;
-  line-height:1.5;
-  max-width:550px;
+  max-width:570px;
+  margin:15px auto 0;
+  color:#949db3;
+  line-height:1.6;
+  font-size:14px;
+}
+
+/* CALCULATOR */
+
+.calculator-wrap{
+  max-width:530px;
   margin:auto;
 }
 
 .calculator{
-  max-width:520px;
-  margin:auto;
-  padding:13px;
-  border-radius:30px;
-  background:linear-gradient(145deg,#242a42,#0d101c);
-  border:1px solid rgba(255,255,255,.12);
+  position:relative;
+  padding:14px;
+  border-radius:31px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(43,49,72,.98),
+      rgba(11,14,25,.99) 58%,
+      rgba(25,29,46,.98)
+    );
+
+  border:1px solid rgba(255,255,255,.13);
+
   box-shadow:
-    0 30px 80px rgba(0,0,0,.65),
-    inset 0 1px rgba(255,255,255,.08);
+    0 40px 100px rgba(0,0,0,.65),
+    0 12px 35px rgba(0,0,0,.4),
+    inset 0 1px rgba(255,255,255,.10),
+    inset 0 -1px rgba(0,0,0,.7);
 }
 
+.calculator::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:30px;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.06),
+      transparent 30%
+    );
+}
+
+/* TOP */
+
 .top{
+  position:relative;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  margin-bottom:10px;
+  justify-content:space-between;
+  margin-bottom:11px;
 }
 
 .modes{
@@ -119,39 +186,97 @@ main{
 
 .modes button,
 .angle{
-  border:1px solid rgba(255,255,255,.1);
-  background:#151a2b;
-  color:#aeb5c7;
+  border:1px solid rgba(255,255,255,.08);
+  color:#aeb6ca;
+  background:
+    linear-gradient(
+      180deg,
+      #1b2133,
+      #111624
+    );
   padding:9px 12px;
-  border-radius:10px;
+  border-radius:11px;
   cursor:pointer;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.06),
+    0 3px 8px rgba(0,0,0,.25);
+}
+
+.modes button:active,
+.angle:active{
+  transform:translateY(1px);
 }
 
 .modes .active{
-  background:#7544e5;
-  color:white;
+  color:#fff;
+  background:
+    linear-gradient(
+      180deg,
+      #8754f4,
+      #6333c8
+    );
+  border-color:rgba(205,181,255,.25);
+  box-shadow:
+    0 5px 16px rgba(124,72,239,.25),
+    inset 0 1px rgba(255,255,255,.18);
 }
 
+/* DISPLAY */
+
 .display{
-  min-height:145px;
-  padding:18px;
-  border-radius:22px;
-  background:#080b14;
-  border:1px solid rgba(255,255,255,.06);
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
+  position:relative;
+  min-height:150px;
+  padding:17px 17px 14px;
+  margin-bottom:12px;
+  border-radius:23px;
   overflow:hidden;
-  margin-bottom:10px;
+
+  background:
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(117,79,210,.12),
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      #060911,
+      #0d1220
+    );
+
+  border:1px solid rgba(255,255,255,.07);
+
+  box-shadow:
+    inset 0 2px 18px rgba(0,0,0,.55),
+    inset 0 -1px rgba(255,255,255,.03);
+}
+
+.display::after{
+  content:"";
+  position:absolute;
+  left:15%;
+  right:15%;
+  top:0;
+  height:1px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.13),
+    transparent
+  );
 }
 
 .expression{
   min-height:24px;
-  color:#70788e;
+  color:#717b94;
   font-size:14px;
   text-align:right;
   white-space:nowrap;
-  overflow:auto;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+
+.expression::-webkit-scrollbar{
+  display:none;
 }
 
 #display{
@@ -159,17 +284,22 @@ main{
   border:0;
   outline:0;
   background:transparent;
-  color:white;
+  color:#fff;
   text-align:right;
-  font-size:38px;
-  font-weight:700;
+  font-size:40px;
+  font-weight:750;
+  letter-spacing:-1px;
+  overflow:hidden;
+  text-overflow:clip;
 }
+
+/* SCIENTIFIC */
 
 .scientific{
   display:none;
   grid-template-columns:repeat(5,1fr);
-  gap:6px;
-  margin-bottom:8px;
+  gap:7px;
+  margin-bottom:9px;
 }
 
 .scientific.show{
@@ -178,78 +308,198 @@ main{
 
 .scientific button{
   height:43px;
-  border:0;
-  border-radius:11px;
-  background:#191f32;
-  color:#d4d9e6;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:12px;
+  color:#cdd4e5;
+  background:
+    linear-gradient(
+      180deg,
+      #20263a,
+      #171c2d
+    );
   cursor:pointer;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.06),
+    0 3px 7px rgba(0,0,0,.25);
 }
+
+.scientific button:active{
+  transform:translateY(3px) scale(.97);
+  box-shadow:
+    inset 0 2px 5px rgba(0,0,0,.4);
+}
+
+/* BUTTON GRID */
 
 .keys{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:8px;
+  gap:9px;
 }
+
+/* PREMIUM 3D BUTTON */
 
 .key{
-  height:64px;
-  border:0;
+  position:relative;
+  height:65px;
+
+  border:1px solid rgba(255,255,255,.055);
   border-radius:18px;
-  background:#1b2134;
-  color:white;
+
+  color:#fff;
   font-size:20px;
+  font-weight:600;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--key-top) 0%,
+      var(--key) 48%,
+      #181d2e 100%
+    );
+
   cursor:pointer;
-  transition:transform .08s,filter .08s;
+
   box-shadow:
-    inset 0 1px rgba(255,255,255,.05),
-    0 3px 7px rgba(0,0,0,.25);
-  -webkit-tap-highlight-color:transparent;
+    0 7px 0 #0c101b,
+    0 10px 17px rgba(0,0,0,.35),
+    inset 0 1px rgba(255,255,255,.10),
+    inset 0 -1px rgba(0,0,0,.4);
+
+  transition:
+    transform .075s ease,
+    box-shadow .075s ease,
+    filter .075s ease;
 }
 
+/* Highlight on button */
+
+.key::before{
+  content:"";
+  position:absolute;
+  left:10%;
+  right:10%;
+  top:5px;
+  height:1px;
+  border-radius:50%;
+  background:rgba(255,255,255,.12);
+}
+
+/* REAL PRESS EFFECT */
+
 .key:hover{
-  filter:brightness(1.15);
+  filter:brightness(1.12);
 }
 
 .key:active{
-  transform:scale(.91);
-  filter:brightness(1.25);
+  transform:
+    translateY(6px)
+    scale(.975);
+
+  box-shadow:
+    0 1px 0 #0c101b,
+    0 3px 7px rgba(0,0,0,.35),
+    inset 0 3px 7px rgba(0,0,0,.28),
+    inset 0 1px rgba(255,255,255,.05);
+
+  filter:brightness(1.2);
 }
+
+/* FUNCTION BUTTONS */
 
 .function{
-  background:#292f42;
+  background:
+    linear-gradient(
+      180deg,
+      #353b50,
+      #252b3e
+    );
 }
+
+/* OPERATORS */
 
 .operator{
-  background:linear-gradient(145deg,#6335ca,#8750ed);
+  background:
+    linear-gradient(
+      180deg,
+      #925df4,
+      #6a38d2 55%,
+      #5426b3
+    );
+
+  box-shadow:
+    0 7px 0 #351b76,
+    0 10px 20px rgba(103,54,207,.28),
+    inset 0 1px rgba(255,255,255,.20);
 }
 
+.operator:active{
+  box-shadow:
+    0 1px 0 #351b76,
+    0 3px 8px rgba(103,54,207,.25),
+    inset 0 3px 8px rgba(0,0,0,.2);
+}
+
+/* EQUALS */
+
 .equals{
-  background:linear-gradient(145deg,#a36aff,#6532d8);
+  background:
+    linear-gradient(
+      180deg,
+      #b47aff,
+      #8146e8 55%,
+      #6330c6
+    );
+
+  box-shadow:
+    0 7px 0 #36187c,
+    0 12px 25px rgba(132,70,232,.32),
+    inset 0 1px rgba(255,255,255,.24);
+}
+
+.equals:active{
+  box-shadow:
+    0 1px 0 #36187c,
+    0 4px 9px rgba(132,70,232,.25),
+    inset 0 3px 8px rgba(0,0,0,.25);
 }
 
 .memory{
-  font-size:14px;
+  font-size:13px;
 }
 
+/* HISTORY */
+
 .history{
-  max-width:520px;
-  margin:16px auto 0;
-  padding:17px;
-  border-radius:20px;
-  background:rgba(16,20,35,.82);
+  margin-top:18px;
+  padding:18px;
+  border-radius:22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22,27,45,.86),
+      rgba(10,13,23,.86)
+    );
+
   border:1px solid rgba(255,255,255,.08);
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.25),
+    inset 0 1px rgba(255,255,255,.05);
 }
 
 .history-head{
   display:flex;
   justify-content:space-between;
-  margin-bottom:10px;
+  align-items:center;
+  margin-bottom:11px;
 }
 
 .history-head button{
   border:0;
   background:none;
-  color:#a276ff;
+  color:#a477ff;
   cursor:pointer;
 }
 
@@ -259,41 +509,55 @@ main{
 }
 
 .history-item{
-  padding:10px 12px;
-  margin-bottom:6px;
-  border-radius:10px;
-  background:#0b0f1a;
-  color:#adb4c6;
+  padding:11px 13px;
+  margin-bottom:7px;
+  border-radius:12px;
+  background:#090d17;
+  border:1px solid rgba(255,255,255,.04);
+  color:#adb5c8;
   font-size:13px;
   word-break:break-all;
 }
 
+/* FEATURES */
+
 .features{
-  margin:45px auto 0;
   max-width:850px;
+  margin:50px auto 0;
 }
 
 .features h2{
   text-align:center;
-  margin-bottom:20px;
+  margin-bottom:21px;
+  font-size:29px;
 }
 
 .cards{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:12px;
+  gap:14px;
 }
 
 .card{
-  padding:20px;
-  border-radius:18px;
-  background:rgba(17,21,37,.75);
-  border:1px solid rgba(255,255,255,.08);
+  padding:21px;
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(26,31,51,.78),
+      rgba(12,16,28,.78)
+    );
+
+  border:1px solid rgba(255,255,255,.07);
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.05);
 }
 
 .card-icon{
-  font-size:26px;
-  margin-bottom:9px;
+  font-size:27px;
+  margin-bottom:10px;
 }
 
 .card h3{
@@ -301,51 +565,69 @@ main{
 }
 
 .card p{
-  color:#8e96aa;
+  color:#8e97ad;
   font-size:13px;
-  line-height:1.5;
+  line-height:1.55;
 }
 
+/* FOOTER */
+
 footer{
-  margin-top:50px;
-  padding:25px;
+  margin-top:55px;
+  padding:27px 15px;
   text-align:center;
   border-top:1px solid rgba(255,255,255,.08);
-  color:#70788e;
+  color:#70798f;
   font-size:13px;
 }
+
+/* MOBILE */
 
 @media(max-width:600px){
 
   header{
-    padding:0 15px;
+    padding:0 14px;
+  }
+
+  .logo{
+    font-size:19px;
   }
 
   main{
-    padding:25px 8px 50px;
+    padding:27px 8px 55px;
   }
 
   .hero h1{
-    font-size:42px;
+    font-size:43px;
+    letter-spacing:-1.8px;
   }
 
   .calculator{
     padding:10px;
-    border-radius:25px;
+    border-radius:27px;
   }
 
   .display{
-    min-height:125px;
+    min-height:130px;
+    border-radius:21px;
   }
 
   #display{
-    font-size:32px;
+    font-size:33px;
   }
 
   .key{
-    height:60px;
+    height:61px;
     border-radius:16px;
-    font-size:19px;
+  }
+
+  .scientific{
+    gap:5px;
+  }
+
+  .scientific button{
+    height:41px;
+    font-size:11px;
   }
 
   .cards{
@@ -358,18 +640,24 @@ footer{
 <body>
 
 <header>
+
   <div class="logo">
     Calcora <span>Calculator</span>
   </div>
-  <div class="status">⚡ Fast</div>
+
+  <div class="status">
+    ⚡ Fast
+  </div>
+
 </header>
+
 
 <main>
 
 <section class="hero">
 
   <div class="badge">
-    ✦ POWERFUL ONLINE CALCULATOR
+    ✦ PREMIUM ONLINE CALCULATOR
   </div>
 
   <h1>
@@ -377,12 +665,14 @@ footer{
   </h1>
 
   <p>
-    Fast, accurate and powerful calculator for everyday
-    and scientific calculations.
+    Fast, accurate and powerful calculations
+    with a premium calculator experience.
   </p>
 
 </section>
 
+
+<div class="calculator-wrap">
 
 <div class="calculator">
 
@@ -417,7 +707,10 @@ footer{
 
 <div class="display">
 
-  <div id="expression" class="expression"></div>
+  <div
+    class="expression"
+    id="expression">
+  </div>
 
   <input
     id="display"
@@ -427,7 +720,9 @@ footer{
 </div>
 
 
-<div id="scientific" class="scientific">
+<div
+  class="scientific"
+  id="scientific">
 
   <button onclick="special('sin')">sin</button>
   <button onclick="special('cos')">cos</button>
@@ -452,35 +747,154 @@ footer{
 
 <div class="keys">
 
-<button class="key function" onclick="clearAll()">AC</button>
-<button class="key function" onclick="backspace()">⌫</button>
-<button class="key function" onclick="percent()">%</button>
-<button class="key operator" onclick="press('/')">÷</button>
+<button
+  class="key function"
+  onclick="clearAll()">
+  AC
+</button>
 
-<button class="key" onclick="press('7')">7</button>
-<button class="key" onclick="press('8')">8</button>
-<button class="key" onclick="press('9')">9</button>
-<button class="key operator" onclick="press('*')">×</button>
+<button
+  class="key function"
+  onclick="backspace()">
+  ⌫
+</button>
 
-<button class="key" onclick="press('4')">4</button>
-<button class="key" onclick="press('5')">5</button>
-<button class="key" onclick="press('6')">6</button>
-<button class="key operator" onclick="press('-')">−</button>
+<button
+  class="key function"
+  onclick="percent()">
+  %
+</button>
 
-<button class="key" onclick="press('1')">1</button>
-<button class="key" onclick="press('2')">2</button>
-<button class="key" onclick="press('3')">3</button>
-<button class="key operator" onclick="press('+')">+</button>
+<button
+  class="key operator"
+  onclick="press('/')">
+  ÷
+</button>
 
-<button class="key memory" onclick="memoryClear()">MC</button>
-<button class="key" onclick="press('0')">0</button>
-<button class="key" onclick="press('.')">.</button>
-<button class="key equals" onclick="calculate()">=</button>
 
-<button class="key memory" onclick="memoryAdd()">M+</button>
-<button class="key memory" onclick="memorySubtract()">M−</button>
-<button class="key memory" onclick="memoryRecall()">MR</button>
-<button class="key function" onclick="toggleSign()">±</button>
+<button
+  class="key"
+  onclick="press('7')">
+  7
+</button>
+
+<button
+  class="key"
+  onclick="press('8')">
+  8
+</button>
+
+<button
+  class="key"
+  onclick="press('9')">
+  9
+</button>
+
+<button
+  class="key operator"
+  onclick="press('*')">
+  ×
+</button>
+
+
+<button
+  class="key"
+  onclick="press('4')">
+  4
+</button>
+
+<button
+  class="key"
+  onclick="press('5')">
+  5
+</button>
+
+<button
+  class="key"
+  onclick="press('6')">
+  6
+</button>
+
+<button
+  class="key operator"
+  onclick="press('-')">
+  −
+</button>
+
+
+<button
+  class="key"
+  onclick="press('1')">
+  1
+</button>
+
+<button
+  class="key"
+  onclick="press('2')">
+  2
+</button>
+
+<button
+  class="key"
+  onclick="press('3')">
+  3
+</button>
+
+<button
+  class="key operator"
+  onclick="press('+')">
+  +
+</button>
+
+
+<button
+  class="key memory"
+  onclick="memoryClear()">
+  MC
+</button>
+
+<button
+  class="key"
+  onclick="press('0')">
+  0
+</button>
+
+<button
+  class="key"
+  onclick="press('.')">
+  .
+</button>
+
+<button
+  class="key equals"
+  onclick="calculate()">
+  =
+</button>
+
+
+<button
+  class="key memory"
+  onclick="memoryAdd()">
+  M+
+</button>
+
+<button
+  class="key memory"
+  onclick="memorySubtract()">
+  M−
+</button>
+
+<button
+  class="key memory"
+  onclick="memoryRecall()">
+  MR
+</button>
+
+<button
+  class="key function"
+  onclick="toggleSign()">
+  ±
+</button>
 
 </div>
 
@@ -489,19 +903,27 @@ footer{
 
 <div class="history">
 
-<div class="history-head">
-<strong>Calculation History</strong>
+  <div class="history-head">
 
-<button onclick="clearHistory()">
-Clear
-</button>
-</div>
+    <strong>
+      Calculation History
+    </strong>
 
-<div id="historyList" class="history-list">
+    <button onclick="clearHistory()">
+      Clear
+    </button>
 
-<div class="history-item">
-Your calculations will appear here.
-</div>
+  </div>
+
+  <div
+    class="history-list"
+    id="historyList">
+
+    <div class="history-item">
+      Your calculations will appear here.
+    </div>
+
+  </div>
 
 </div>
 
@@ -510,35 +932,63 @@ Your calculations will appear here.
 
 <section class="features">
 
-<h2>Why Calcora?</h2>
+<h2>
+  Why Calcora?
+</h2>
 
 <div class="cards">
 
 <div class="card">
-<div class="card-icon">∞</div>
-<h3>Huge Numbers</h3>
-<p>
-Calculate extremely large integer results
-without ordinary JavaScript number limits.
-</p>
+
+  <div class="card-icon">
+    ∞
+  </div>
+
+  <h3>
+    Huge Numbers
+  </h3>
+
+  <p>
+    Powerful integer calculations for
+    extremely large numbers.
+  </p>
+
 </div>
 
-<div class="card">
-<div class="card-icon">🔬</div>
-<h3>Scientific Mode</h3>
-<p>
-Trigonometry, logarithms, powers, roots
-and advanced functions.
-</p>
-</div>
 
 <div class="card">
-<div class="card-icon">📱</div>
-<h3>Mobile Ready</h3>
-<p>
-A modern calculator interface designed
-for phones, tablets and desktops.
-</p>
+
+  <div class="card-icon">
+    🔬
+  </div>
+
+  <h3>
+    Scientific Mode
+  </h3>
+
+  <p>
+    Trigonometry, logarithms, powers,
+    roots and more.
+  </p>
+
+</div>
+
+
+<div class="card">
+
+  <div class="card-icon">
+    📱
+  </div>
+
+  <h3>
+    Mobile Ready
+  </h3>
+
+  <p>
+    A premium responsive experience
+    on phones, tablets and desktops.
+  </p>
+
 </div>
 
 </div>
@@ -549,7 +999,7 @@ for phones, tablets and desktops.
 
 
 <footer>
-© 2026 Calcora Calculator • Free Online Calculator
+  © 2026 Calcora Calculator • Free Online Calculator
 </footer>
 
 
@@ -604,23 +1054,23 @@ function buttonSound(){
     oscillator.type = "sine";
 
     oscillator.frequency.setValueAtTime(
-      700,
+      680,
       audioContext.currentTime
     );
 
     oscillator.frequency.exponentialRampToValueAtTime(
       420,
-      audioContext.currentTime + 0.035
+      audioContext.currentTime + .035
     );
 
     gain.gain.setValueAtTime(
-      0.05,
+      .045,
       audioContext.currentTime
     );
 
     gain.gain.exponentialRampToValueAtTime(
-      0.001,
-      audioContext.currentTime + 0.045
+      .001,
+      audioContext.currentTime + .05
     );
 
     oscillator.connect(gain);
@@ -629,7 +1079,7 @@ function buttonSound(){
     oscillator.start();
 
     oscillator.stop(
-      audioContext.currentTime + 0.05
+      audioContext.currentTime + .055
     );
 
   }catch(e){}
@@ -650,31 +1100,27 @@ function update(){
 
 
 /* =========================
-   REMOVE TRAILING OPERATORS
+   VISIBLE SYMBOL
+========================= */
+
+function visibleExpression(value){
+
+  return String(value)
+    .replace(/\*/g,"×")
+    .replace(/\//g,"÷");
+
+}
+
+
+/* =========================
+   CLEAN END OPERATORS
 ========================= */
 
 function cleanExpression(value){
 
-  let result =
-  value.trim();
-
-  /*
-    If user enters:
-
-    5*5*5*
-
-    automatically becomes:
-
-    5*5*5
-  */
-
-  result =
-  result.replace(
-    /[+\-*/]+$/,
-    ""
-  );
-
-  return result;
+  return value
+    .trim()
+    .replace(/[+\-*/]+$/,"");
 
 }
 
@@ -769,25 +1215,21 @@ function percent(){
 
 
 /* =========================
-   INTEGER EXPRESSION CHECK
+   BIG INTEGER
 ========================= */
 
 function isIntegerExpression(value){
 
   return /^[0-9+\-*()\s]+$/.test(value)
-  &&
-  !value.includes("/")
-  &&
-  !value.includes(".")
-  &&
-  !value.includes("**");
+    &&
+    !value.includes("/")
+    &&
+    !value.includes(".")
+    &&
+    !value.includes("**");
 
 }
 
-
-/* =========================
-   BIGINT PARSER
-========================= */
 
 function bigIntegerCalculate(value){
 
@@ -900,7 +1342,6 @@ function bigIntegerCalculate(value){
 
     }
 
-
     throw new Error();
 
   }
@@ -921,7 +1362,7 @@ function bigIntegerCalculate(value){
 
 
 /* =========================
-   NORMAL NUMBER FORMAT
+   NUMBER FORMAT
 ========================= */
 
 function formatNumber(value){
@@ -949,11 +1390,6 @@ function calculate(){
 
   try{
 
-    /*
-      First remove accidental
-      trailing operators.
-    */
-
     const original =
     current.trim();
 
@@ -962,22 +1398,15 @@ function calculate(){
 
 
     if(!old){
+
       current = "";
       update();
       return;
+
     }
 
 
-    /*
-      BIG INTEGER MODE
-
-      Example:
-
-      5*5*5*5*5*5*...
-
-      Hundreds of integers can
-      be processed here.
-    */
+    /* BIG INTEGER MODE */
 
     if(isIntegerExpression(old)){
 
@@ -988,9 +1417,12 @@ function calculate(){
       result.toString();
 
       expression.textContent =
-      original === old
-      ? old + " ="
-      : original + " → " + old + " =";
+        visibleExpression(original) +
+        (original === old
+          ? " ="
+          : " → " +
+            visibleExpression(old) +
+            " =");
 
       update();
 
@@ -1004,16 +1436,13 @@ function calculate(){
     }
 
 
-    /*
-      NORMAL DECIMAL MODE
-    */
+    /* NORMAL DECIMAL MODE */
 
     const safe =
     old.replace(
       /[^0-9+\-*/().]/g,
       ""
     );
-
 
     if(!safe){
       throw new Error();
@@ -1022,417 +1451,4 @@ function calculate(){
 
     const result =
     Function(
-      '"use strict";return (' +
-      safe +
-      ')'
-    )();
-
-
-    if(!Number.isFinite(result)){
-      throw new Error();
-    }
-
-
-    current =
-    formatNumber(result);
-
-    expression.textContent =
-    original === old
-    ? old + " ="
-    : original + " → " + old + " =";
-
-    update();
-
-    addHistory(
-      old,
-      current
-    );
-
-
-  }catch{
-
-    current = "Error";
-    expression.textContent = "";
-
-    update();
-
-  }
-
-}
-
-
-/* =========================
-   HISTORY
-========================= */
-
-function addHistory(a,b){
-
-  const first =
-  historyList.querySelector(
-    ".history-item"
-  );
-
-
-  if(
-    first &&
-    first.textContent.includes(
-      "Your calculations"
-    )
-  ){
-
-    historyList.innerHTML = "";
-
-  }
-
-
-  const item =
-  document.createElement("div");
-
-  item.className =
-  "history-item";
-
-  item.textContent =
-  a + " = " + b;
-
-  historyList.prepend(item);
-
-}
-
-
-function clearHistory(){
-
-  buttonSound();
-
-  historyList.innerHTML =
-  '<div class="history-item">' +
-  'Your calculations will appear here.' +
-  '</div>';
-
-}
-
-
-/* =========================
-   MODE
-========================= */
-
-function setMode(mode){
-
-  buttonSound();
-
-  const scientific =
-  mode === "scientific";
-
-  document
-  .getElementById("scientific")
-  .classList
-  .toggle(
-    "show",
-    scientific
-  );
-
-  document
-  .getElementById("standardBtn")
-  .classList
-  .toggle(
-    "active",
-    !scientific
-  );
-
-  document
-  .getElementById("scientificBtn")
-  .classList
-  .toggle(
-    "active",
-    scientific
-  );
-
-}
-
-
-/* =========================
-   DEG / RAD
-========================= */
-
-function toggleAngle(){
-
-  buttonSound();
-
-  angleMode =
-  angleMode === "DEG"
-  ? "RAD"
-  : "DEG";
-
-  document
-  .getElementById("angleBtn")
-  .textContent =
-  angleMode;
-
-}
-
-
-function radians(x){
-
-  return angleMode === "DEG"
-  ? x * Math.PI / 180
-  : x;
-
-}
-
-
-/* =========================
-   SCIENTIFIC
-========================= */
-
-function special(type){
-
-  buttonSound();
-
-  try{
-
-    if(type === "pi"){
-
-      current +=
-      String(Math.PI);
-
-      update();
-      return;
-    }
-
-
-    if(type === "e"){
-
-      current +=
-      String(Math.E);
-
-      update();
-      return;
-    }
-
-
-    const x =
-    Number(current);
-
-    if(!Number.isFinite(x)){
-      throw new Error();
-    }
-
-    let result;
-
-
-    if(type === "sin")
-      result =
-      Math.sin(radians(x));
-
-
-    if(type === "cos")
-      result =
-      Math.cos(radians(x));
-
-
-    if(type === "tan")
-      result =
-      Math.tan(radians(x));
-
-
-    if(type === "log")
-      result =
-      Math.log10(x);
-
-
-    if(type === "ln")
-      result =
-      Math.log(x);
-
-
-    if(type === "sqrt")
-      result =
-      Math.sqrt(x);
-
-
-    if(type === "square")
-      result =
-      x * x;
-
-
-    if(type === "cube")
-      result =
-      x * x * x;
-
-
-    if(type === "inverse")
-      result =
-      1 / x;
-
-
-    if(type === "factorial"){
-
-      if(
-        x < 0 ||
-        !Number.isInteger(x) ||
-        x > 170
-      ){
-        throw new Error();
-      }
-
-      result = 1;
-
-      for(
-        let i = 2;
-        i <= x;
-        i++
-      ){
-
-        result *= i;
-
-      }
-
-    }
-
-
-    if(!Number.isFinite(result)){
-      throw new Error();
-    }
-
-
-    const old =
-    current;
-
-    current =
-    formatNumber(result);
-
-    expression.textContent =
-    type + "(" + old + ") =";
-
-    update();
-
-    addHistory(
-      type + "(" + old + ")",
-      current
-    );
-
-
-  }catch{
-
-    current = "Error";
-
-    update();
-
-  }
-
-}
-
-
-/* =========================
-   MEMORY
-========================= */
-
-function memoryClear(){
-
-  buttonSound();
-
-  memory = 0;
-
-}
-
-
-function memoryAdd(){
-
-  buttonSound();
-
-  const x =
-  Number(current);
-
-  if(Number.isFinite(x)){
-    memory += x;
-  }
-
-}
-
-
-function memorySubtract(){
-
-  buttonSound();
-
-  const x =
-  Number(current);
-
-  if(Number.isFinite(x)){
-    memory -= x;
-  }
-
-}
-
-
-function memoryRecall(){
-
-  buttonSound();
-
-  current =
-  String(memory);
-
-  update();
-
-}
-
-
-/* =========================
-   SIGN
-========================= */
-
-function toggleSign(){
-
-  buttonSound();
-
-  if(
-    !current ||
-    current === "0"
-  ){
-    return;
-  }
-
-  current =
-  current.startsWith("-")
-  ? current.slice(1)
-  : "-" + current;
-
-  update();
-
-}
-
-
-/* =========================
-   KEYBOARD
-========================= */
-
-document.addEventListener(
-  "keydown",
-  function(e){
-
-    if(
-      "0123456789.+-*/()"
-      .includes(e.key)
-    ){
-
-      press(e.key);
-
-    }
-
-
-    if(
-      e.key === "Enter" ||
-      e.key === "="
-    ){
-
-      calculate();
-
-    }
-
-
-    if(e.key === "Backspace"){
-      backspace();
-    }
-
-
-    if(e.key === "Escape"){
-      clearAll();
-  
+      '"use strict";ret
