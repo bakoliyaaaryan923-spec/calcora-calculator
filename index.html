@@ -4,10 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>Calcora Calculator – Free Online Calculator</title>
-<meta name="description" content="Calcora is a fast, powerful and premium free online calculator.">
+<title>Calcora Calculator - Free Online Calculator</title>
+
+<meta
+  name="description"
+  content="Calcora is a fast, powerful and premium free online calculator with scientific calculations and large number support."
+>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -17,37 +22,71 @@
 
 :root{
   --bg:#070912;
+  --panel:#111628;
   --key:#20263a;
-  --key-top:#303850;
-  --purple:#7c48ef;
+  --key2:#30384f;
+  --purple:#7944e8;
   --purple2:#a66cff;
+  --text:#ffffff;
+  --muted:#8f98ae;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
   min-height:100vh;
-  color:#fff;
-  font-family:Inter,Arial,Helvetica,sans-serif;
+  color:var(--text);
+  font-family:
+    Inter,
+    Arial,
+    Helvetica,
+    sans-serif;
+
   background:
-    radial-gradient(circle at 15% -5%,rgba(93,79,190,.42),transparent 32%),
-    radial-gradient(circle at 90% 10%,rgba(139,55,175,.30),transparent 30%),
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(78,76,170,.42),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 8%,
+      rgba(145,55,177,.30),
+      transparent 30%
+    ),
     #070912;
 }
 
+
+/* ================= HEADER ================= */
+
 header{
   height:70px;
+
   padding:0 6%;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
-  border-bottom:1px solid rgba(255,255,255,.08);
+
   background:rgba(5,7,14,.72);
+
+  border-bottom:
+    1px solid rgba(255,255,255,.08);
+
   backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+
+  position:sticky;
+  top:0;
+  z-index:20;
 }
 
 .logo{
   font-size:22px;
   font-weight:850;
-  letter-spacing:-.7px;
+  letter-spacing:-.8px;
 }
 
 .logo span{
@@ -56,81 +95,143 @@ header{
 
 .status{
   padding:9px 14px;
+
   border-radius:13px;
-  color:#d7c9ff;
+
+  color:#dacdff;
+
   font-size:12px;
-  background:rgba(124,72,239,.12);
-  border:1px solid rgba(166,108,255,.22);
+  font-weight:600;
+
+  background:
+    rgba(124,72,239,.12);
+
+  border:
+    1px solid rgba(166,108,255,.24);
 }
 
+
+/* ================= MAIN ================= */
+
 main{
-  max-width:950px;
+  max-width:1000px;
+
   margin:auto;
-  padding:38px 12px 70px;
+
+  padding:
+    40px 12px 75px;
 }
+
+
+/* ================= HERO ================= */
 
 .hero{
   text-align:center;
-  margin-bottom:28px;
+
+  margin-bottom:30px;
 }
 
 .badge{
   display:inline-flex;
+
   padding:8px 14px;
+
   border-radius:999px;
-  color:#d5c5ff;
+
+  color:#d8c9ff;
+
   font-size:12px;
-  background:rgba(124,72,239,.10);
-  border:1px solid rgba(166,108,255,.25);
+  font-weight:600;
+
+  background:
+    rgba(124,72,239,.10);
+
+  border:
+    1px solid rgba(166,108,255,.25);
 }
 
 .hero h1{
   margin-top:15px;
-  font-size:clamp(40px,8vw,66px);
+
+  font-size:
+    clamp(42px,8vw,68px);
+
   line-height:.98;
-  letter-spacing:-2.5px;
+
+  letter-spacing:-2.8px;
 }
 
 .gradient{
-  background:linear-gradient(100deg,#fff,#d4c0ff,#9a62ff);
+  background:
+    linear-gradient(
+      100deg,
+      #ffffff,
+      #d7c5ff,
+      #965bff
+    );
+
   -webkit-background-clip:text;
   background-clip:text;
+
   color:transparent;
 }
 
 .hero p{
-  max-width:570px;
-  margin:15px auto 0;
-  color:#949db3;
-  line-height:1.6;
+  max-width:590px;
+
+  margin:
+    16px auto 0;
+
+  color:#959db2;
+
   font-size:14px;
+
+  line-height:1.65;
 }
 
+
+/* ================= CALCULATOR ================= */
+
 .calculator-wrap{
-  max-width:530px;
+  width:100%;
+  max-width:540px;
+
   margin:auto;
 }
 
 .calculator{
+
   padding:14px;
+
   border-radius:31px;
+
   background:
-    linear-gradient(145deg,
-      rgba(43,49,72,.98),
-      rgba(11,14,25,.99) 58%,
-      rgba(25,29,46,.98));
-  border:1px solid rgba(255,255,255,.13);
+    linear-gradient(
+      145deg,
+      rgba(44,50,73,.98),
+      rgba(10,13,24,.99) 60%,
+      rgba(24,29,47,.98)
+    );
+
+  border:
+    1px solid rgba(255,255,255,.13);
+
   box-shadow:
-    0 40px 100px rgba(0,0,0,.65),
-    0 12px 35px rgba(0,0,0,.4),
+    0 40px 110px rgba(0,0,0,.68),
+    0 12px 35px rgba(0,0,0,.40),
     inset 0 1px rgba(255,255,255,.10);
 }
 
-.top{
+
+/* ================= TOP BAR ================= */
+
+.topbar{
   display:flex;
+
   align-items:center;
   justify-content:space-between;
-  margin-bottom:11px;
+
+  margin-bottom:12px;
 }
 
 .modes{
@@ -140,42 +241,107 @@ main{
 
 .modes button,
 .angle{
-  border:1px solid rgba(255,255,255,.08);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
   color:#aeb6ca;
-  background:linear-gradient(180deg,#1b2133,#111624);
-  padding:9px 12px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #1c2235,
+      #111624
+    );
+
+  padding:
+    9px 12px;
+
   border-radius:11px;
+
   cursor:pointer;
+
+  transition:.15s ease;
+}
+
+.modes button:active,
+.angle:active{
+  transform:scale(.95);
 }
 
 .modes .active{
-  color:#fff;
-  background:linear-gradient(180deg,#8754f4,#6333c8);
+
+  color:#ffffff;
+
+  background:
+    linear-gradient(
+      180deg,
+      #8956f3,
+      #6332ca
+    );
+
+  border-color:
+    rgba(194,165,255,.22);
 }
 
+
+/* ================= DISPLAY ================= */
+
 .display{
+
   min-height:150px;
+
   padding:17px;
-  margin-bottom:12px;
+
+  margin-bottom:13px;
+
   border-radius:23px;
+
   overflow:hidden;
+
   background:
-    radial-gradient(circle at 80% 10%,rgba(117,79,210,.12),transparent 35%),
-    linear-gradient(145deg,#060911,#0d1220);
-  border:1px solid rgba(255,255,255,.07);
+
+    radial-gradient(
+      circle at 80% 0%,
+      rgba(125,80,230,.13),
+      transparent 35%
+    ),
+
+    linear-gradient(
+      145deg,
+      #060911,
+      #0e1321
+    );
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
   box-shadow:
-    inset 0 2px 18px rgba(0,0,0,.55),
+    inset 0 2px 20px rgba(0,0,0,.58),
     inset 0 -1px rgba(255,255,255,.03);
+
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
 }
 
 .expression{
-  min-height:25px;
-  color:#717b94;
+
+  min-height:24px;
+
+  color:#727c95;
+
   font-size:14px;
+
   text-align:right;
+
   white-space:nowrap;
+
   overflow-x:auto;
+
   scrollbar-width:none;
+
+  margin-bottom:3px;
 }
 
 .expression::-webkit-scrollbar{
@@ -183,22 +349,43 @@ main{
 }
 
 #display{
+
   width:100%;
+
   border:0;
   outline:0;
+
   background:transparent;
-  color:#fff;
+
+  color:#ffffff;
+
   text-align:right;
+
   font-size:40px;
+
   font-weight:750;
-  letter-spacing:-1px;
+
+  letter-spacing:-1.2px;
+
+  font-family:
+    Inter,
+    Arial,
+    sans-serif;
 }
 
+
+/* ================= SCIENTIFIC ================= */
+
 .scientific{
+
   display:none;
-  grid-template-columns:repeat(5,1fr);
+
+  grid-template-columns:
+    repeat(5,1fr);
+
   gap:7px;
-  margin-bottom:9px;
+
+  margin-bottom:10px;
 }
 
 .scientific.show{
@@ -206,50 +393,105 @@ main{
 }
 
 .scientific button{
-  height:43px;
-  border:1px solid rgba(255,255,255,.06);
+
+  height:44px;
+
+  border:
+    1px solid rgba(255,255,255,.06);
+
   border-radius:12px;
-  color:#cdd4e5;
-  background:linear-gradient(180deg,#20263a,#171c2d);
+
+  color:#d0d6e6;
+
+  background:
+    linear-gradient(
+      180deg,
+      #252c42,
+      #181e30
+    );
+
   cursor:pointer;
+
+  transition:.1s;
 }
 
+.scientific button:active{
+  transform:
+    translateY(3px)
+    scale(.97);
+}
+
+
+/* ================= KEYS ================= */
+
 .keys{
+
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(4,1fr);
+
   gap:9px;
 }
 
 .key{
+
   position:relative;
+
   height:65px;
-  border:1px solid rgba(255,255,255,.055);
+
+  border:
+    1px solid rgba(255,255,255,.055);
+
   border-radius:18px;
-  color:#fff;
+
+  color:#ffffff;
+
   font-size:20px;
-  font-weight:600;
-  background:linear-gradient(
-    180deg,
-    var(--key-top),
-    var(--key) 48%,
-    #181d2e
-  );
+
+  font-weight:650;
+
+  background:
+    linear-gradient(
+      180deg,
+      #323950,
+      #22283b 48%,
+      #181d2e
+    );
+
   cursor:pointer;
+
   box-shadow:
-    0 7px 0 #0c101b,
-    0 10px 17px rgba(0,0,0,.35),
-    inset 0 1px rgba(255,255,255,.10);
-  transition:.075s ease;
+
+    0 7px 0 #0b0f19,
+
+    0 10px 18px
+    rgba(0,0,0,.36),
+
+    inset 0 1px
+    rgba(255,255,255,.11);
+
+  transition:
+    transform .075s ease,
+    filter .12s ease,
+    box-shadow .075s ease;
 }
 
 .key::before{
+
   content:"";
+
   position:absolute;
+
   left:10%;
   right:10%;
+
   top:5px;
+
   height:1px;
-  background:rgba(255,255,255,.12);
+
+  background:
+    rgba(255,255,255,.13);
 }
 
 .key:hover{
@@ -257,146 +499,261 @@ main{
 }
 
 .key:active{
-  transform:translateY(6px) scale(.975);
+
+  transform:
+    translateY(6px)
+    scale(.975);
+
   box-shadow:
-    0 1px 0 #0c101b,
-    0 3px 7px rgba(0,0,0,.35),
-    inset 0 3px 7px rgba(0,0,0,.28);
+
+    0 1px 0 #0b0f19,
+
+    0 3px 7px
+    rgba(0,0,0,.35),
+
+    inset 0 3px 8px
+    rgba(0,0,0,.28);
 }
+
+
+/* FUNCTION */
 
 .function{
-  background:linear-gradient(180deg,#353b50,#252b3e);
+
+  background:
+    linear-gradient(
+      180deg,
+      #383e53,
+      #252b3e
+    );
 }
 
+
+/* OPERATOR */
+
 .operator{
-  background:linear-gradient(
-    180deg,
-    #925df4,
-    #6a38d2 55%,
-    #5426b3
-  );
+
+  background:
+    linear-gradient(
+      180deg,
+      #955ff6,
+      #6b38d3 55%,
+      #5425b1
+    );
+
   box-shadow:
-    0 7px 0 #351b76,
-    0 10px 20px rgba(103,54,207,.28),
-    inset 0 1px rgba(255,255,255,.20);
+
+    0 7px 0 #351a75,
+
+    0 10px 21px
+    rgba(103,54,207,.28),
+
+    inset 0 1px
+    rgba(255,255,255,.21);
 }
 
 .operator:active{
+
   box-shadow:
-    0 1px 0 #351b76,
-    0 3px 8px rgba(103,54,207,.25);
+
+    0 1px 0 #351a75,
+
+    0 3px 8px
+    rgba(103,54,207,.25);
 }
 
+
+/* EQUALS */
+
 .equals{
-  background:linear-gradient(
-    180deg,
-    #b47aff,
-    #8146e8 55%,
-    #6330c6
-  );
+
+  background:
+    linear-gradient(
+      180deg,
+      #b47aff,
+      #8247e9 55%,
+      #622fc4
+    );
+
   box-shadow:
-    0 7px 0 #36187c,
-    0 12px 25px rgba(132,70,232,.32),
-    inset 0 1px rgba(255,255,255,.24);
+
+    0 7px 0 #36187b,
+
+    0 12px 25px
+    rgba(132,70,232,.34),
+
+    inset 0 1px
+    rgba(255,255,255,.25);
 }
+
+
+/* MEMORY */
 
 .memory{
   font-size:13px;
 }
 
+
+/* ================= HISTORY ================= */
+
 .history{
-  margin-top:18px;
+
+  margin-top:19px;
+
   padding:18px;
+
   border-radius:22px;
-  background:linear-gradient(
-    145deg,
-    rgba(22,27,45,.86),
-    rgba(10,13,23,.86)
-  );
-  border:1px solid rgba(255,255,255,.08);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(24,29,48,.86),
+      rgba(9,12,22,.86)
+    );
+
+  border:
+    1px solid rgba(255,255,255,.08);
 }
 
 .history-head{
+
   display:flex;
-  justify-content:space-between;
+
   align-items:center;
-  margin-bottom:11px;
+
+  justify-content:space-between;
+
+  margin-bottom:12px;
 }
 
 .history-head button{
+
   border:0;
+
   background:none;
+
   color:#a477ff;
+
   cursor:pointer;
 }
 
 .history-list{
+
   max-height:190px;
+
   overflow:auto;
 }
 
 .history-item{
-  padding:11px 13px;
+
+  padding:
+    11px 13px;
+
   margin-bottom:7px;
+
   border-radius:12px;
+
   background:#090d17;
-  border:1px solid rgba(255,255,255,.04);
+
+  border:
+    1px solid rgba(255,255,255,.04);
+
   color:#adb5c8;
+
   font-size:13px;
+
   word-break:break-all;
 }
 
+
+/* ================= FEATURES ================= */
+
 .features{
-  max-width:850px;
-  margin:50px auto 0;
+
+  max-width:900px;
+
+  margin:
+    52px auto 0;
 }
 
 .features h2{
+
   text-align:center;
-  margin-bottom:21px;
+
   font-size:29px;
+
+  margin-bottom:22px;
 }
 
 .cards{
+
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:15px;
 }
 
 .card{
-  padding:21px;
+
+  padding:22px;
+
   border-radius:20px;
-  background:linear-gradient(
-    145deg,
-    rgba(26,31,51,.78),
-    rgba(12,16,28,.78)
-  );
-  border:1px solid rgba(255,255,255,.07);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(27,32,52,.78),
+      rgba(11,15,27,.78)
+    );
+
+  border:
+    1px solid rgba(255,255,255,.07);
 }
 
 .card-icon{
-  font-size:27px;
-  margin-bottom:10px;
+
+  font-size:28px;
+
+  margin-bottom:11px;
 }
 
 .card h3{
-  margin-bottom:7px;
+  margin-bottom:8px;
 }
 
 .card p{
-  color:#8e97ad;
+
+  color:#8f98ad;
+
   font-size:13px;
+
   line-height:1.55;
 }
 
+
+/* ================= FOOTER ================= */
+
 footer{
-  margin-top:55px;
-  padding:27px 15px;
+
+  margin-top:58px;
+
+  padding:
+    28px 15px;
+
   text-align:center;
-  border-top:1px solid rgba(255,255,255,.08);
+
+  border-top:
+    1px solid rgba(255,255,255,.08);
+
   color:#70798f;
+
   font-size:13px;
 }
+
+
+/* ================= MOBILE ================= */
 
 @media(max-width:600px){
 
@@ -409,7 +766,8 @@ footer{
   }
 
   main{
-    padding:27px 8px 55px;
+    padding:
+      28px 8px 55px;
   }
 
   .hero h1{
@@ -422,7 +780,7 @@ footer{
   }
 
   .display{
-    min-height:130px;
+    min-height:132px;
   }
 
   #display{
@@ -447,12 +805,16 @@ footer{
     grid-template-columns:1fr;
   }
 }
+
 </style>
 </head>
 
+
 <body>
 
+
 <header>
+
   <div class="logo">
     Calcora <span>Calculator</span>
   </div>
@@ -460,9 +822,12 @@ footer{
   <div class="status">
     ⚡ Fast
   </div>
+
 </header>
 
+
 <main>
+
 
 <section class="hero">
 
@@ -471,7 +836,10 @@ footer{
   </div>
 
   <h1>
-    Calculate <span class="gradient">Smarter.</span>
+    Calculate
+    <span class="gradient">
+      Smarter.
+    </span>
   </h1>
 
   <p>
@@ -481,11 +849,17 @@ footer{
 
 </section>
 
+
+
 <div class="calculator-wrap">
+
 
 <div class="calculator">
 
-<div class="top">
+
+<!-- TOP -->
+
+<div class="topbar">
 
   <div class="modes">
 
@@ -504,20 +878,27 @@ footer{
 
   </div>
 
+
   <button
     class="angle"
     id="angleBtn"
     onclick="toggleAngle()">
+
     DEG
+
   </button>
 
 </div>
 
+
+
+<!-- DISPLAY -->
+
 <div class="display">
 
   <div
-    class="expression"
-    id="expression">
+    id="expression"
+    class="expression">
   </div>
 
   <input
@@ -527,147 +908,419 @@ footer{
 
 </div>
 
+
+
+<!-- SCIENTIFIC -->
+
 <div
-  class="scientific"
-  id="scientific">
+  id="scientific"
+  class="scientific">
 
-  <button onclick="special('sin')">sin</button>
-  <button onclick="special('cos')">cos</button>
-  <button onclick="special('tan')">tan</button>
-  <button onclick="special('log')">log</button>
-  <button onclick="special('ln')">ln</button>
+  <button onclick="special('sin')">
+    sin
+  </button>
 
-  <button onclick="special('sqrt')">√</button>
-  <button onclick="special('square')">x²</button>
-  <button onclick="special('cube')">x³</button>
-  <button onclick="special('pi')">π</button>
-  <button onclick="special('e')">e</button>
+  <button onclick="special('cos')">
+    cos
+  </button>
 
-  <button onclick="special('inverse')">1/x</button>
-  <button onclick="special('factorial')">x!</button>
-  <button onclick="press('**')">xʸ</button>
-  <button onclick="press('(')">(</button>
-  <button onclick="press(')')">)</button>
+  <button onclick="special('tan')">
+    tan
+  </button>
+
+  <button onclick="special('log')">
+    log
+  </button>
+
+  <button onclick="special('ln')">
+    ln
+  </button>
+
+  <button onclick="special('sqrt')">
+    √
+  </button>
+
+  <button onclick="special('square')">
+    x²
+  </button>
+
+  <button onclick="special('cube')">
+    x³
+  </button>
+
+  <button onclick="special('pi')">
+    π
+  </button>
+
+  <button onclick="special('e')">
+    e
+  </button>
+
+  <button onclick="special('inverse')">
+    1/x
+  </button>
+
+  <button onclick="special('factorial')">
+    x!
+  </button>
+
+  <button onclick="press('**')">
+    xʸ
+  </button>
+
+  <button onclick="press('(')">
+    (
+  </button>
+
+  <button onclick="press(')')">
+    )
+  </button>
 
 </div>
+
+
+
+<!-- MAIN KEYS -->
 
 <div class="keys">
 
-<button class="key function" onclick="clearAll()">AC</button>
-<button class="key function" onclick="backspace()">⌫</button>
-<button class="key function" onclick="percent()">%</button>
-<button class="key operator" onclick="press('*')">×</button>
 
-<button class="key" onclick="press('7')">7</button>
-<button class="key" onclick="press('8')">8</button>
-<button class="key" onclick="press('9')">9</button>
-<button class="key operator" onclick="press('*')">×</button>
+  <button
+    class="key function"
+    onclick="clearAll()">
+    AC
+  </button>
 
-<button class="key" onclick="press('4')">4</button>
-<button class="key" onclick="press('5')">5</button>
-<button class="key" onclick="press('6')">6</button>
-<button class="key operator" onclick="press('-')">−</button>
 
-<button class="key" onclick="press('1')">1</button>
-<button class="key" onclick="press('2')">2</button>
-<button class="key" onclick="press('3')">3</button>
-<button class="key operator" onclick="press('+')">+</button>
+  <button
+    class="key function"
+    onclick="backspace()">
+    ⌫
+  </button>
 
-<button class="key memory" onclick="memoryClear()">MC</button>
-<button class="key" onclick="press('0')">0</button>
-<button class="key" onclick="press('.')">.</button>
-<button class="key equals" onclick="calculate()">=</button>
 
-<button class="key memory" onclick="memoryAdd()">M+</button>
-<button class="key memory" onclick="memorySubtract()">M−</button>
-<button class="key memory" onclick="memoryRecall()">MR</button>
-<button class="key function" onclick="toggleSign()">±</button>
+  <button
+    class="key function"
+    onclick="percent()">
+    %
+  </button>
+
+
+  <button
+    class="key operator"
+    onclick="press('*')">
+    ×
+  </button>
+
+
+
+  <button
+    class="key"
+    onclick="press('7')">
+    7
+  </button>
+
+
+  <button
+    class="key"
+    onclick="press('8')">
+    8
+  </button>
+
+
+  <button
+    class="key"
+    onclick="press('9')">
+    9
+  </button>
+
+
+  <button
+    class="key operator"
+    onclick="press('*')">
+    ×
+  </button>
+
+
+
+  <button
+    class="key"
+    onclick="press('4')">
+    4
+  </button>
+
+
+  <button
+    class="key"
+    onclick="press('5')">
+    5
+  </button>
+
+
+  <button
+    class="key"
+    onclick="press('6')">
+    6
+  </button>
+
+
+  <button
+    class="key operator"
+    onclick="press('-')">
+    −
+  </button>
+
+
+
+  <button
+    class="key"
+    onclick="press('1')">
+    1
+  </button>
+
+
+  <button
+    class="key"
+    onclick="press('2')">
+    2
+  </button>
+
+
+  <button
+    class="key"
+    onclick="press('3')">
+    3
+  </button>
+
+
+  <button
+    class="key operator"
+    onclick="press('+')">
+    +
+  </button>
+
+
+
+  <button
+    class="key memory"
+    onclick="memoryClear()">
+    MC
+  </button>
+
+
+  <button
+    class="key"
+    onclick="press('0')">
+    0
+  </button>
+
+
+  <button
+    class="key"
+    onclick="press('.')">
+    .
+  </button>
+
+
+  <button
+    class="key equals"
+    onclick="calculate()">
+    =
+  </button>
+
+
+
+  <button
+    class="key memory"
+    onclick="memoryAdd()">
+    M+
+  </button>
+
+
+  <button
+    class="key memory"
+    onclick="memorySubtract()">
+    M−
+  </button>
+
+
+  <button
+    class="key memory"
+    onclick="memoryRecall()">
+    MR
+  </button>
+
+
+  <button
+    class="key function"
+    onclick="toggleSign()">
+    ±
+  </button>
+
 
 </div>
 
 </div>
+
+
+
+<!-- HISTORY -->
 
 <div class="history">
 
-<div class="history-head">
-<strong>Calculation History</strong>
-<button onclick="clearHistory()">Clear</button>
+  <div class="history-head">
+
+    <strong>
+      Calculation History
+    </strong>
+
+    <button
+      onclick="clearHistory()">
+      Clear
+    </button>
+
+  </div>
+
+
+  <div
+    id="historyList"
+    class="history-list">
+
+    <div class="history-item">
+      Your calculations will appear here.
+    </div>
+
+  </div>
+
 </div>
 
-<div class="history-list" id="historyList">
-<div class="history-item">
-Your calculations will appear here.
-</div>
-</div>
 
 </div>
 
-</div>
+
+
+<!-- FEATURES -->
 
 <section class="features">
 
-<h2>Why Calcora?</h2>
+  <h2>
+    Why Calcora?
+  </h2>
 
-<div class="cards">
 
-<div class="card">
-<div class="card-icon">∞</div>
-<h3>Huge Numbers</h3>
-<p>
-Powerful integer calculations for
-extremely large numbers.
-</p>
-</div>
+  <div class="cards">
 
-<div class="card">
-<div class="card-icon">🔬</div>
-<h3>Scientific Mode</h3>
-<p>
-Trigonometry, logarithms, powers,
-roots and more.
-</p>
-</div>
 
-<div class="card">
-<div class="card-icon">📱</div>
-<h3>Mobile Ready</h3>
-<p>
-A premium responsive experience
-on phones, tablets and desktops.
-</p>
-</div>
+    <div class="card">
 
-</div>
+      <div class="card-icon">
+        ∞
+      </div>
+
+      <h3>
+        Huge Numbers
+      </h3>
+
+      <p>
+        Large integer calculations
+        are handled using BigInt
+        technology.
+      </p>
+
+    </div>
+
+
+
+    <div class="card">
+
+      <div class="card-icon">
+        🔬
+      </div>
+
+      <h3>
+        Scientific Mode
+      </h3>
+
+      <p>
+        Trigonometry, logarithms,
+        powers, roots and more.
+      </p>
+
+    </div>
+
+
+
+    <div class="card">
+
+      <div class="card-icon">
+        📱
+      </div>
+
+      <h3>
+        Mobile Ready
+      </h3>
+
+      <p>
+        Premium responsive design
+        for phones, tablets and
+        desktops.
+      </p>
+
+    </div>
+
+
+  </div>
 
 </section>
 
+
 </main>
 
+
 <footer>
-© 2026 Calcora Calculator • Free Online Calculator
+
+  © 2026 Calcora Calculator
+  • Free Online Calculator
+
 </footer>
 
+
+
 <script>
+
+
+/* =====================================================
+   CALCORA CALCULATOR ENGINE
+   ===================================================== */
 
 let current = "";
 let memory = 0;
 let angleMode = "DEG";
 
+
 const display =
-document.getElementById("display");
+  document.getElementById("display");
 
 const expression =
-document.getElementById("expression");
+  document.getElementById("expression");
 
 const historyList =
-document.getElementById("historyList");
+  document.getElementById("historyList");
 
+
+
+/* =====================================================
+   DISPLAY SYMBOLS
+   ===================================================== */
 
 /*
- IMPORTANT:
- JavaScript uses * internally.
- The user NEVER sees *.
- Every * is converted to × before display.
+   Internally JavaScript uses:
+   * = multiplication
+   / = division
+
+   User sees:
+   × = multiplication
+   ÷ = division
 */
 
 function visible(value){
@@ -679,39 +1332,53 @@ function visible(value){
 }
 
 
-/* DISPLAY */
 
 function update(){
 
   display.value =
-    current
-    ? visible(current)
-    : "0";
+    current || "0";
 
 }
 
 
-/* BUTTON SOUND */
+
+/* =====================================================
+   BUTTON SOUND
+   ===================================================== */
 
 let audioContext = null;
+
 
 function buttonSound(){
 
   try{
 
+    const AudioContext =
+      window.AudioContext ||
+      window.webkitAudioContext;
+
+    if(!AudioContext){
+      return;
+    }
+
+
     if(!audioContext){
 
       audioContext =
-        new (
-          window.AudioContext ||
-          window.webkitAudioContext
-        )();
+        new AudioContext();
 
     }
 
-    if(audioContext.state === "suspended"){
+
+    if(
+      audioContext.state ===
+      "suspended"
+    ){
+
       audioContext.resume();
+
     }
+
 
     const oscillator =
       audioContext.createOscillator();
@@ -719,71 +1386,96 @@ function buttonSound(){
     const gain =
       audioContext.createGain();
 
-    oscillator.type = "sine";
+
+    oscillator.type =
+      "sine";
+
 
     oscillator.frequency.setValueAtTime(
-      650,
+      620,
       audioContext.currentTime
     );
+
 
     oscillator.frequency.exponentialRampToValueAtTime(
-      430,
-      audioContext.currentTime + 0.035
+      400,
+      audioContext.currentTime + .035
     );
 
+
     gain.gain.setValueAtTime(
-      0.045,
+      .045,
       audioContext.currentTime
     );
 
+
     gain.gain.exponentialRampToValueAtTime(
-      0.001,
-      audioContext.currentTime + 0.05
+      .001,
+      audioContext.currentTime + .055
     );
 
+
     oscillator.connect(gain);
-    gain.connect(audioContext.destination);
+
+    gain.connect(
+      audioContext.destination
+    );
+
 
     oscillator.start();
 
+
     oscillator.stop(
-      audioContext.currentTime + 0.055
+      audioContext.currentTime + .06
     );
 
-  }catch(e){}
+
+  }catch(error){
+
+    /* Sound is optional.
+       Calculator continues working. */
+
+  }
 
 }
 
 
-/* PRESS */
+
+/* =====================================================
+   PRESS
+   ===================================================== */
 
 function press(value){
 
   buttonSound();
 
+
   if(current === "Error"){
+
     current = "";
+
   }
 
-  /*
-   Keep * internally.
-   update() automatically displays ×.
-  */
 
   current += value;
+
 
   update();
 
 }
 
 
-/* CLEAR */
+
+/* =====================================================
+   CLEAR
+   ===================================================== */
 
 function clearAll(){
 
   buttonSound();
 
   current = "";
+
   expression.textContent = "";
 
   update();
@@ -791,49 +1483,72 @@ function clearAll(){
 }
 
 
-/* BACKSPACE */
+
+/* =====================================================
+   BACKSPACE
+   ===================================================== */
 
 function backspace(){
 
   buttonSound();
 
+
   if(current === "Error"){
+
     current = "";
+
   }else{
+
     current =
       current.slice(0,-1);
+
   }
+
 
   update();
 
 }
 
 
-/* PERCENT */
+
+/* =====================================================
+   PERCENT
+   ===================================================== */
 
 function percent(){
 
   buttonSound();
 
-  if(!current) return;
+
+  if(!current){
+    return;
+  }
+
 
   try{
 
     const value =
       Number(current);
 
+
     if(!Number.isFinite(value)){
+
       throw new Error();
+
     }
+
 
     current =
       String(value / 100);
 
+
     update();
+
 
   }catch{
 
     current = "Error";
+
     update();
 
   }
@@ -841,9 +1556,12 @@ function percent(){
 }
 
 
-/* REMOVE END OPERATORS */
 
-function cleanEnd(value){
+/* =====================================================
+   END OPERATOR CLEANER
+   ===================================================== */
+
+function removeEndOperators(value){
 
   return value
     .trim()
@@ -852,42 +1570,62 @@ function cleanEnd(value){
 }
 
 
-/* BIG INTEGER */
+
+/* =====================================================
+   BIG INTEGER DETECTOR
+   ===================================================== */
 
 function isBigIntegerExpression(value){
 
-  return /^[0-9+\-*()\s]+$/.test(value)
-    &&
-    !value.includes("/")
+  return (
+    /^[0-9+\-*()\s]+$/.test(value)
     &&
     !value.includes(".")
     &&
-    !value.includes("**");
+    !value.includes("/")
+    &&
+    !value.includes("**")
+  );
 
 }
 
 
-function bigCalculate(value){
+
+/* =====================================================
+   BIG INTEGER CALCULATOR
+   ===================================================== */
+
+function calculateBigInteger(input){
 
   const tokens =
-    value.match(/\d+|[()+\-*]/g);
+    input.match(
+      /\d+|[()+\-*]/g
+    );
+
 
   if(!tokens){
+
     throw new Error();
+
   }
+
 
   let position = 0;
 
 
-  function expressionParser(){
+
+  function parseExpression(){
 
     let result =
-      termParser();
+      parseTerm();
+
 
     while(
-      position < tokens.length &&
+      position < tokens.length
+      &&
       (
-        tokens[position] === "+" ||
+        tokens[position] === "+"
+        ||
         tokens[position] === "-"
       )
     ){
@@ -895,487 +1633,101 @@ function bigCalculate(value){
       const operator =
         tokens[position++];
 
+
       const right =
-        termParser();
+        parseTerm();
+
 
       if(operator === "+"){
+
         result += right;
+
       }else{
+
         result -= right;
+
       }
 
     }
+
 
     return result;
 
   }
 
 
-  function termParser(){
+
+  function parseTerm(){
 
     let result =
-      factorParser();
+      parseFactor();
+
 
     while(
-      position < tokens.length &&
+      position < tokens.length
+      &&
       tokens[position] === "*"
     ){
 
       position++;
 
+
       result *=
-        factorParser();
+        parseFactor();
 
     }
+
 
     return result;
 
   }
 
 
-  function factorParser(){
 
-    if(position >= tokens.length){
+  function parseFactor(){
+
+    if(
+      position >=
+      tokens.length
+    ){
+
       throw new Error();
+
     }
+
 
     const token =
       tokens[position];
 
 
+    /* Parentheses */
+
     if(token === "("){
 
       position++;
 
-      const result =
-        expressionParser();
 
-      if(tokens[position] !== ")"){
+      const result =
+        parseExpression();
+
+
+      if(
+        tokens[position] !== ")"
+      ){
+
         throw new Error();
+
       }
 
+
       position++;
+
 
       return result;
 
     }
 
 
-    if(token === "-"){
+    /* Negative */
 
-      position++;
-
-      return -factorParser();
-
-    }
-
-
-    if(/^\d+$/.test(token)){
-
-      position++;
-
-      return BigInt(token);
-
-    }
-
-    throw new Error();
-
-  }
-
-
-  const result =
-    expressionParser();
-
-  if(position !== tokens.length){
-    throw new Error();
-  }
-
-  return result;
-
-}
-
-
-/* NORMAL NUMBER FORMAT */
-
-function formatNumber(value){
-
-  if(!Number.isFinite(value)){
-    throw new Error();
-  }
-
-  return String(
-    Number(value.toPrecision(15))
-  );
-
-}
-
-
-/* CALCULATE */
-
-function calculate(){
-
-  buttonSound();
-
-  if(!current) return;
-
-  try{
-
-    const original =
-      current.trim();
-
-    const old =
-      cleanEnd(original);
-
-
-    if(!old){
-
-      current = "";
-      update();
-
-      return;
-    }
-
-
-    /*
-     BIG INTEGER MODE
-     Allows extremely long integer calculations.
-    */
-
-    if(isBigIntegerExpression(old)){
-
-      const result =
-        bigCalculate(old);
-
-      current =
-        result.toString();
-
-      expression.textContent =
-        visible(old) + " =";
-
-      update();
-
-      addHistory(
-        old,
-        current
-      );
-
-      return;
-
-    }
-
-
-    /*
-     NORMAL DECIMAL MODE
-    */
-
-    const safe =
-      old.replace(
-        /[^0-9+\-*/().]/g,
-        ""
-      );
-
-    if(!safe){
-      throw new Error();
-    }
-
-
-    const result =
-      Function(
-        '"use strict";return (' +
-        safe +
-        ')'
-      )();
-
-
-    if(!Number.isFinite(result)){
-      throw new Error();
-    }
-
-
-    current =
-      formatNumber(result);
-
-    expression.textContent =
-      visible(old) + " =";
-
-    update();
-
-    addHistory(
-      old,
-      current
-    );
-
-
-  }catch{
-
-    current = "Error";
-
-    expression.textContent = "";
-
-    update();
-
-  }
-
-}
-
-
-/* HISTORY */
-
-function addHistory(a,b){
-
-  const first =
-    historyList.querySelector(
-      ".history-item"
-    );
-
-
-  if(
-    first &&
-    first.textContent.includes(
-      "Your calculations"
-    )
-  ){
-
-    historyList.innerHTML = "";
-
-  }
-
-
-  const item =
-    document.createElement("div");
-
-  item.className =
-    "history-item";
-
-  item.textContent =
-    visible(a) +
-    " = " +
-    b;
-
-  historyList.prepend(item);
-
-}
-
-
-function clearHistory(){
-
-  buttonSound();
-
-  historyList.innerHTML =
-    '<div class="history-item">' +
-    'Your calculations will appear here.' +
-    '</div>';
-
-}
-
-
-/* MODE */
-
-function setMode(mode){
-
-  buttonSound();
-
-  const scientific =
-    mode === "scientific";
-
-  document
-    .getElementById("scientific")
-    .classList
-    .toggle("show",scientific);
-
-  document
-    .getElementById("standardBtn")
-    .classList
-    .toggle("active",!scientific);
-
-  document
-    .getElementById("scientificBtn")
-    .classList
-    .toggle("active",scientific);
-
-}
-
-
-/* ANGLE */
-
-function toggleAngle(){
-
-  buttonSound();
-
-  angleMode =
-    angleMode === "DEG"
-      ? "RAD"
-      : "DEG";
-
-  document
-    .getElementById("angleBtn")
-    .textContent =
-    angleMode;
-
-}
-
-
-function radians(x){
-
-  return angleMode === "DEG"
-    ? x * Math.PI / 180
-    : x;
-
-}
-
-
-/* SCIENTIFIC */
-
-function special(type){
-
-  buttonSound();
-
-  try{
-
-    if(type === "pi"){
-
-      current +=
-        String(Math.PI);
-
-      update();
-
-      return;
-    }
-
-
-    if(type === "e"){
-
-      current +=
-        String(Math.E);
-
-      update();
-
-      return;
-    }
-
-
-    const x =
-      Number(current);
-
-    if(!Number.isFinite(x)){
-      throw new Error();
-    }
-
-    let result;
-
-
-    if(type === "sin")
-      result =
-        Math.sin(radians(x));
-
-    if(type === "cos")
-      result =
-        Math.cos(radians(x));
-
-    if(type === "tan")
-      result =
-        Math.tan(radians(x));
-
-    if(type === "log")
-      result =
-        Math.log10(x);
-
-    if(type === "ln")
-      result =
-        Math.log(x);
-
-    if(type === "sqrt")
-      result =
-        Math.sqrt(x);
-
-    if(type === "square")
-      result =
-        x * x;
-
-    if(type === "cube")
-      result =
-        x * x * x;
-
-    if(type === "inverse")
-      result =
-        1 / x;
-
-
-    if(type === "factorial"){
-
-      if(
-        x < 0 ||
-        !Number.isInteger(x) ||
-        x > 170
-      ){
-        throw new Error();
-      }
-
-      result = 1;
-
-      for(
-        let i = 2;
-        i <= x;
-        i++
-      ){
-        result *= i;
-      }
-
-    }
-
-
-    if(!Number.isFinite(result)){
-      throw new Error();
-    }
-
-
-    const old =
-      current;
-
-    current =
-      formatNumber(result);
-
-    expression.textContent =
-      type +
-      "(" +
-      visible(old) +
-      ") =";
-
-    update();
-
-    addHistory(
-      type + "(" + old + ")",
-      current
-    );
-
-
-  }catch{
-
-    current = "Error";
-
-    update();
-
-  }
-
-}
-
-
-/* MEMORY */
-
-function memoryClear(){
-
-  buttonSound();
-
-  memory = 0;
-
-}
-
-
-function memoryAdd(){
-
-  buttonSound();
-
-  const x =
-    Number(current);
-
-  if(Number.isFi
+    i
