@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Calcora Calculator - Free Online Calculator</title>
 
-<meta
-  name="description"
-  content="Calcora is a fast, powerful and premium free online calculator with scientific calculations and large number support."
->
+<meta name="description"
+content="Calcora is a fast, powerful and premium free online calculator with scientific calculations and huge number support.">
 
 <style>
 
@@ -24,10 +22,9 @@
   --bg:#070912;
   --panel:#111628;
   --key:#20263a;
-  --key2:#30384f;
-  --purple:#7944e8;
-  --purple2:#a66cff;
-  --text:#ffffff;
+  --purple:#7b43e8;
+  --purple2:#aa6cff;
+  --text:#fff;
   --muted:#8f98ae;
 }
 
@@ -38,11 +35,7 @@ html{
 body{
   min-height:100vh;
   color:var(--text);
-  font-family:
-    Inter,
-    Arial,
-    Helvetica,
-    sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
 
   background:
     radial-gradient(
@@ -59,24 +52,21 @@ body{
 }
 
 
-/* ================= HEADER ================= */
+/* HEADER */
 
 header{
   height:70px;
-
   padding:0 6%;
 
   display:flex;
   align-items:center;
   justify-content:space-between;
 
-  background:rgba(5,7,14,.72);
+  background:rgba(5,7,14,.78);
+  border-bottom:1px solid rgba(255,255,255,.08);
 
-  border-bottom:
-    1px solid rgba(255,255,255,.08);
-
-  backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
 
   position:sticky;
   top:0;
@@ -85,8 +75,7 @@ header{
 
 .logo{
   font-size:22px;
-  font-weight:850;
-  letter-spacing:-.8px;
+  font-weight:800;
 }
 
 .logo span{
@@ -95,69 +84,51 @@ header{
 
 .status{
   padding:9px 14px;
-
   border-radius:13px;
 
-  color:#dacdff;
-
+  color:#dfd2ff;
   font-size:12px;
   font-weight:600;
 
-  background:
-    rgba(124,72,239,.12);
-
-  border:
-    1px solid rgba(166,108,255,.24);
+  background:rgba(124,72,239,.12);
+  border:1px solid rgba(166,108,255,.25);
 }
 
 
-/* ================= MAIN ================= */
+/* MAIN */
 
 main{
   max-width:1000px;
-
   margin:auto;
-
-  padding:
-    40px 12px 75px;
+  padding:40px 12px 75px;
 }
 
 
-/* ================= HERO ================= */
+/* HERO */
 
 .hero{
   text-align:center;
-
   margin-bottom:30px;
 }
 
 .badge{
   display:inline-flex;
-
   padding:8px 14px;
-
   border-radius:999px;
 
   color:#d8c9ff;
-
   font-size:12px;
   font-weight:600;
 
-  background:
-    rgba(124,72,239,.10);
-
-  border:
-    1px solid rgba(166,108,255,.25);
+  background:rgba(124,72,239,.10);
+  border:1px solid rgba(166,108,255,.25);
 }
 
 .hero h1{
   margin-top:15px;
 
-  font-size:
-    clamp(42px,8vw,68px);
-
+  font-size:clamp(42px,8vw,68px);
   line-height:.98;
-
   letter-spacing:-2.8px;
 }
 
@@ -172,37 +143,29 @@ main{
 
   -webkit-background-clip:text;
   background-clip:text;
-
   color:transparent;
 }
 
 .hero p{
   max-width:590px;
-
-  margin:
-    16px auto 0;
+  margin:16px auto 0;
 
   color:#959db2;
-
   font-size:14px;
-
   line-height:1.65;
 }
 
 
-/* ================= CALCULATOR ================= */
+/* CALCULATOR */
 
 .calculator-wrap{
   width:100%;
   max-width:540px;
-
   margin:auto;
 }
 
 .calculator{
-
   padding:14px;
-
   border-radius:31px;
 
   background:
@@ -213,8 +176,7 @@ main{
       rgba(24,29,47,.98)
     );
 
-  border:
-    1px solid rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.13);
 
   box-shadow:
     0 40px 110px rgba(0,0,0,.68),
@@ -223,14 +185,12 @@ main{
 }
 
 
-/* ================= TOP BAR ================= */
+/* TOP */
 
 .topbar{
   display:flex;
-
   align-items:center;
   justify-content:space-between;
-
   margin-bottom:12px;
 }
 
@@ -241,9 +201,7 @@ main{
 
 .modes button,
 .angle{
-
-  border:
-    1px solid rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.08);
 
   color:#aeb6ca;
 
@@ -254,24 +212,14 @@ main{
       #111624
     );
 
-  padding:
-    9px 12px;
-
+  padding:9px 12px;
   border-radius:11px;
 
   cursor:pointer;
-
-  transition:.15s ease;
-}
-
-.modes button:active,
-.angle:active{
-  transform:scale(.95);
 }
 
 .modes .active{
-
-  color:#ffffff;
+  color:white;
 
   background:
     linear-gradient(
@@ -279,42 +227,32 @@ main{
       #8956f3,
       #6332ca
     );
-
-  border-color:
-    rgba(194,165,255,.22);
 }
 
 
-/* ================= DISPLAY ================= */
+/* DISPLAY */
 
 .display{
-
   min-height:150px;
-
   padding:17px;
-
   margin-bottom:13px;
 
   border-radius:23px;
-
   overflow:hidden;
 
   background:
-
     radial-gradient(
       circle at 80% 0%,
       rgba(125,80,230,.13),
       transparent 35%
     ),
-
     linear-gradient(
       145deg,
       #060911,
       #0e1321
     );
 
-  border:
-    1px solid rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.07);
 
   box-shadow:
     inset 0 2px 20px rgba(0,0,0,.58),
@@ -326,62 +264,43 @@ main{
 }
 
 .expression{
-
   min-height:24px;
 
   color:#727c95;
-
   font-size:14px;
 
   text-align:right;
 
   white-space:nowrap;
-
   overflow-x:auto;
-
-  scrollbar-width:none;
 
   margin-bottom:3px;
 }
 
-.expression::-webkit-scrollbar{
-  display:none;
-}
-
 #display{
-
   width:100%;
 
   border:0;
   outline:0;
-
   background:transparent;
 
-  color:#ffffff;
+  color:white;
 
   text-align:right;
 
   font-size:40px;
-
   font-weight:750;
 
   letter-spacing:-1.2px;
-
-  font-family:
-    Inter,
-    Arial,
-    sans-serif;
 }
 
 
-/* ================= SCIENTIFIC ================= */
+/* SCIENTIFIC */
 
 .scientific{
-
   display:none;
 
-  grid-template-columns:
-    repeat(5,1fr);
+  grid-template-columns:repeat(5,1fr);
 
   gap:7px;
 
@@ -393,12 +312,9 @@ main{
 }
 
 .scientific button{
-
   height:44px;
 
-  border:
-    1px solid rgba(255,255,255,.06);
-
+  border:1px solid rgba(255,255,255,.06);
   border-radius:12px;
 
   color:#d0d6e6;
@@ -411,44 +327,32 @@ main{
     );
 
   cursor:pointer;
-
-  transition:.1s;
 }
 
 .scientific button:active{
-  transform:
-    translateY(3px)
-    scale(.97);
+  transform:translateY(3px) scale(.97);
 }
 
 
-/* ================= KEYS ================= */
+/* KEYS */
 
 .keys{
-
   display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
+  grid-template-columns:repeat(4,1fr);
   gap:9px;
 }
 
 .key{
-
   position:relative;
 
   height:65px;
 
-  border:
-    1px solid rgba(255,255,255,.055);
-
+  border:1px solid rgba(255,255,255,.055);
   border-radius:18px;
 
-  color:#ffffff;
+  color:white;
 
   font-size:20px;
-
   font-weight:650;
 
   background:
@@ -462,14 +366,9 @@ main{
   cursor:pointer;
 
   box-shadow:
-
     0 7px 0 #0b0f19,
-
-    0 10px 18px
-    rgba(0,0,0,.36),
-
-    inset 0 1px
-    rgba(255,255,255,.11);
+    0 10px 18px rgba(0,0,0,.36),
+    inset 0 1px rgba(255,255,255,.11);
 
   transition:
     transform .075s ease,
@@ -477,49 +376,20 @@ main{
     box-shadow .075s ease;
 }
 
-.key::before{
-
-  content:"";
-
-  position:absolute;
-
-  left:10%;
-  right:10%;
-
-  top:5px;
-
-  height:1px;
-
-  background:
-    rgba(255,255,255,.13);
-}
-
 .key:hover{
   filter:brightness(1.12);
 }
 
 .key:active{
-
-  transform:
-    translateY(6px)
-    scale(.975);
+  transform:translateY(6px) scale(.975);
 
   box-shadow:
-
     0 1px 0 #0b0f19,
-
-    0 3px 7px
-    rgba(0,0,0,.35),
-
-    inset 0 3px 8px
-    rgba(0,0,0,.28);
+    0 3px 7px rgba(0,0,0,.35),
+    inset 0 3px 8px rgba(0,0,0,.28);
 }
 
-
-/* FUNCTION */
-
 .function{
-
   background:
     linear-gradient(
       180deg,
@@ -528,11 +398,7 @@ main{
     );
 }
 
-
-/* OPERATOR */
-
 .operator{
-
   background:
     linear-gradient(
       180deg,
@@ -542,31 +408,12 @@ main{
     );
 
   box-shadow:
-
     0 7px 0 #351a75,
-
-    0 10px 21px
-    rgba(103,54,207,.28),
-
-    inset 0 1px
-    rgba(255,255,255,.21);
+    0 10px 21px rgba(103,54,207,.28),
+    inset 0 1px rgba(255,255,255,.21);
 }
-
-.operator:active{
-
-  box-shadow:
-
-    0 1px 0 #351a75,
-
-    0 3px 8px
-    rgba(103,54,207,.25);
-}
-
-
-/* EQUALS */
 
 .equals{
-
   background:
     linear-gradient(
       180deg,
@@ -576,30 +423,20 @@ main{
     );
 
   box-shadow:
-
     0 7px 0 #36187b,
-
-    0 12px 25px
-    rgba(132,70,232,.34),
-
-    inset 0 1px
-    rgba(255,255,255,.25);
+    0 12px 25px rgba(132,70,232,.34),
+    inset 0 1px rgba(255,255,255,.25);
 }
-
-
-/* MEMORY */
 
 .memory{
   font-size:13px;
 }
 
 
-/* ================= HISTORY ================= */
+/* HISTORY */
 
 .history{
-
   margin-top:19px;
-
   padding:18px;
 
   border-radius:22px;
@@ -611,94 +448,66 @@ main{
       rgba(9,12,22,.86)
     );
 
-  border:
-    1px solid rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.08);
 }
 
 .history-head{
-
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
 
   margin-bottom:12px;
 }
 
 .history-head button{
-
   border:0;
-
   background:none;
-
   color:#a477ff;
-
   cursor:pointer;
 }
 
 .history-list{
-
   max-height:190px;
-
   overflow:auto;
 }
 
 .history-item{
-
-  padding:
-    11px 13px;
-
+  padding:11px 13px;
   margin-bottom:7px;
 
   border-radius:12px;
 
   background:#090d17;
-
-  border:
-    1px solid rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.04);
 
   color:#adb5c8;
-
   font-size:13px;
 
   word-break:break-all;
 }
 
 
-/* ================= FEATURES ================= */
+/* FEATURES */
 
 .features{
-
   max-width:900px;
-
-  margin:
-    52px auto 0;
+  margin:52px auto 0;
 }
 
 .features h2{
-
   text-align:center;
-
   font-size:29px;
-
   margin-bottom:22px;
 }
 
 .cards{
-
   display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
+  grid-template-columns:repeat(3,1fr);
   gap:15px;
 }
 
 .card{
-
   padding:22px;
-
   border-radius:20px;
 
   background:
@@ -708,14 +517,11 @@ main{
       rgba(11,15,27,.78)
     );
 
-  border:
-    1px solid rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.07);
 }
 
 .card-icon{
-
   font-size:28px;
-
   margin-bottom:11px;
 }
 
@@ -724,36 +530,28 @@ main{
 }
 
 .card p{
-
   color:#8f98ad;
-
   font-size:13px;
-
   line-height:1.55;
 }
 
 
-/* ================= FOOTER ================= */
+/* FOOTER */
 
 footer{
-
   margin-top:58px;
-
-  padding:
-    28px 15px;
+  padding:28px 15px;
 
   text-align:center;
 
-  border-top:
-    1px solid rgba(255,255,255,.08);
+  border-top:1px solid rgba(255,255,255,.08);
 
   color:#70798f;
-
   font-size:13px;
 }
 
 
-/* ================= MOBILE ================= */
+/* MOBILE */
 
 @media(max-width:600px){
 
@@ -766,8 +564,7 @@ footer{
   }
 
   main{
-    padding:
-      28px 8px 55px;
+    padding:28px 8px 55px;
   }
 
   .hero h1{
@@ -804,6 +601,7 @@ footer{
   .cards{
     grid-template-columns:1fr;
   }
+
 }
 
 </style>
@@ -811,7 +609,6 @@ footer{
 
 
 <body>
-
 
 <header>
 
@@ -827,7 +624,6 @@ footer{
 
 
 <main>
-
 
 <section class="hero">
 
@@ -850,14 +646,10 @@ footer{
 </section>
 
 
-
 <div class="calculator-wrap">
-
 
 <div class="calculator">
 
-
-<!-- TOP -->
 
 <div class="topbar">
 
@@ -878,21 +670,15 @@ footer{
 
   </div>
 
-
   <button
     class="angle"
     id="angleBtn"
     onclick="toggleAngle()">
-
     DEG
-
   </button>
 
 </div>
 
-
-
-<!-- DISPLAY -->
 
 <div class="display">
 
@@ -909,262 +695,84 @@ footer{
 </div>
 
 
-
-<!-- SCIENTIFIC -->
-
 <div
   id="scientific"
   class="scientific">
 
-  <button onclick="special('sin')">
-    sin
-  </button>
+  <button onclick="special('sin')">sin</button>
+  <button onclick="special('cos')">cos</button>
+  <button onclick="special('tan')">tan</button>
+  <button onclick="special('log')">log</button>
+  <button onclick="special('ln')">ln</button>
 
-  <button onclick="special('cos')">
-    cos
-  </button>
+  <button onclick="special('sqrt')">√</button>
+  <button onclick="special('square')">x²</button>
+  <button onclick="special('cube')">x³</button>
+  <button onclick="special('pi')">π</button>
+  <button onclick="special('e')">e</button>
 
-  <button onclick="special('tan')">
-    tan
-  </button>
-
-  <button onclick="special('log')">
-    log
-  </button>
-
-  <button onclick="special('ln')">
-    ln
-  </button>
-
-  <button onclick="special('sqrt')">
-    √
-  </button>
-
-  <button onclick="special('square')">
-    x²
-  </button>
-
-  <button onclick="special('cube')">
-    x³
-  </button>
-
-  <button onclick="special('pi')">
-    π
-  </button>
-
-  <button onclick="special('e')">
-    e
-  </button>
-
-  <button onclick="special('inverse')">
-    1/x
-  </button>
-
-  <button onclick="special('factorial')">
-    x!
-  </button>
-
-  <button onclick="press('**')">
-    xʸ
-  </button>
-
-  <button onclick="press('(')">
-    (
-  </button>
-
-  <button onclick="press(')')">
-    )
-  </button>
+  <button onclick="special('inverse')">1/x</button>
+  <button onclick="special('factorial')">x!</button>
+  <button onclick="press('**')">xʸ</button>
+  <button onclick="press('(')">(</button>
+  <button onclick="press(')')">)</button>
 
 </div>
 
-
-
-<!-- MAIN KEYS -->
 
 <div class="keys">
 
+  <button class="key function" onclick="clearAll()">AC</button>
 
-  <button
-    class="key function"
-    onclick="clearAll()">
-    AC
-  </button>
+  <button class="key function" onclick="backspace()">⌫</button>
 
+  <button class="key function" onclick="percent()">%</button>
 
-  <button
-    class="key function"
-    onclick="backspace()">
-    ⌫
-  </button>
+  <button class="key operator" onclick="press('/')">÷</button>
 
 
-  <button
-    class="key function"
-    onclick="percent()">
-    %
-  </button>
+  <button class="key" onclick="press('7')">7</button>
+  <button class="key" onclick="press('8')">8</button>
+  <button class="key" onclick="press('9')">9</button>
+
+  <button class="key operator" onclick="press('*')">×</button>
 
 
-  <button
-    class="key operator"
-    onclick="press('*')">
-    ×
-  </button>
+  <button class="key" onclick="press('4')">4</button>
+  <button class="key" onclick="press('5')">5</button>
+  <button class="key" onclick="press('6')">6</button>
+
+  <button class="key operator" onclick="press('-')">−</button>
 
 
+  <button class="key" onclick="press('1')">1</button>
+  <button class="key" onclick="press('2')">2</button>
+  <button class="key" onclick="press('3')">3</button>
 
-  <button
-    class="key"
-    onclick="press('7')">
-    7
-  </button>
-
-
-  <button
-    class="key"
-    onclick="press('8')">
-    8
-  </button>
+  <button class="key operator" onclick="press('+')">+</button>
 
 
-  <button
-    class="key"
-    onclick="press('9')">
-    9
-  </button>
+  <button class="key memory" onclick="memoryClear()">MC</button>
+
+  <button class="key" onclick="press('0')">0</button>
+
+  <button class="key" onclick="press('.')">.</button>
+
+  <button class="key equals" onclick="calculate()">=</button>
 
 
-  <button
-    class="key operator"
-    onclick="press('*')">
-    ×
-  </button>
+  <button class="key memory" onclick="memoryAdd()">M+</button>
 
+  <button class="key memory" onclick="memorySubtract()">M−</button>
 
+  <button class="key memory" onclick="memoryRecall()">MR</button>
 
-  <button
-    class="key"
-    onclick="press('4')">
-    4
-  </button>
-
-
-  <button
-    class="key"
-    onclick="press('5')">
-    5
-  </button>
-
-
-  <button
-    class="key"
-    onclick="press('6')">
-    6
-  </button>
-
-
-  <button
-    class="key operator"
-    onclick="press('-')">
-    −
-  </button>
-
-
-
-  <button
-    class="key"
-    onclick="press('1')">
-    1
-  </button>
-
-
-  <button
-    class="key"
-    onclick="press('2')">
-    2
-  </button>
-
-
-  <button
-    class="key"
-    onclick="press('3')">
-    3
-  </button>
-
-
-  <button
-    class="key operator"
-    onclick="press('+')">
-    +
-  </button>
-
-
-
-  <button
-    class="key memory"
-    onclick="memoryClear()">
-    MC
-  </button>
-
-
-  <button
-    class="key"
-    onclick="press('0')">
-    0
-  </button>
-
-
-  <button
-    class="key"
-    onclick="press('.')">
-    .
-  </button>
-
-
-  <button
-    class="key equals"
-    onclick="calculate()">
-    =
-  </button>
-
-
-
-  <button
-    class="key memory"
-    onclick="memoryAdd()">
-    M+
-  </button>
-
-
-  <button
-    class="key memory"
-    onclick="memorySubtract()">
-    M−
-  </button>
-
-
-  <button
-    class="key memory"
-    onclick="memoryRecall()">
-    MR
-  </button>
-
-
-  <button
-    class="key function"
-    onclick="toggleSign()">
-    ±
-  </button>
-
+  <button class="key function" onclick="toggleSign()">±</button>
 
 </div>
 
 </div>
 
-
-
-<!-- HISTORY -->
 
 <div class="history">
 
@@ -1174,13 +782,11 @@ footer{
       Calculation History
     </strong>
 
-    <button
-      onclick="clearHistory()">
+    <button onclick="clearHistory()">
       Clear
     </button>
 
   </div>
-
 
   <div
     id="historyList"
@@ -1194,52 +800,34 @@ footer{
 
 </div>
 
-
 </div>
 
 
-
-<!-- FEATURES -->
-
 <section class="features">
 
-  <h2>
-    Why Calcora?
-  </h2>
-
+  <h2>Why Calcora?</h2>
 
   <div class="cards">
 
-
     <div class="card">
 
-      <div class="card-icon">
-        ∞
-      </div>
+      <div class="card-icon">∞</div>
 
-      <h3>
-        Huge Numbers
-      </h3>
+      <h3>Huge Numbers</h3>
 
       <p>
         Large integer calculations
-        are handled using BigInt
-        technology.
+        are handled with BigInt technology.
       </p>
 
     </div>
 
 
-
     <div class="card">
 
-      <div class="card-icon">
-        🔬
-      </div>
+      <div class="card-icon">🔬</div>
 
-      <h3>
-        Scientific Mode
-      </h3>
+      <h3>Scientific Mode</h3>
 
       <p>
         Trigonometry, logarithms,
@@ -1249,45 +837,33 @@ footer{
     </div>
 
 
-
     <div class="card">
 
-      <div class="card-icon">
-        📱
-      </div>
+      <div class="card-icon">📱</div>
 
-      <h3>
-        Mobile Ready
-      </h3>
+      <h3>Mobile Ready</h3>
 
       <p>
         Premium responsive design
-        for phones, tablets and
-        desktops.
+        for phones, tablets and desktops.
       </p>
 
     </div>
-
 
   </div>
 
 </section>
 
-
 </main>
 
 
 <footer>
-
-  © 2026 Calcora Calculator
-  • Free Online Calculator
-
+  © 2026 Calcora Calculator • Free Online Calculator
 </footer>
 
 
 
 <script>
-
 
 /* =====================================================
    CALCORA CALCULATOR ENGINE
@@ -1297,49 +873,20 @@ let current = "";
 let memory = 0;
 let angleMode = "DEG";
 
-
-const display =
-  document.getElementById("display");
-
-const expression =
-  document.getElementById("expression");
-
-const historyList =
-  document.getElementById("historyList");
-
+const display = document.getElementById("display");
+const expression = document.getElementById("expression");
+const historyList = document.getElementById("historyList");
 
 
 /* =====================================================
-   DISPLAY SYMBOLS
+   DISPLAY
    ===================================================== */
-
-/*
-   Internally JavaScript uses:
-   * = multiplication
-   / = division
-
-   User sees:
-   × = multiplication
-   ÷ = division
-*/
-
-function visible(value){
-
-  return String(value)
-    .replace(/\*/g,"×")
-    .replace(/\//g,"÷");
-
-}
-
-
 
 function update(){
 
-  display.value =
-    current || "0";
+  display.value = current || "0";
 
 }
-
 
 
 /* =====================================================
@@ -1347,7 +894,6 @@ function update(){
    ===================================================== */
 
 let audioContext = null;
-
 
 function buttonSound(){
 
@@ -1357,10 +903,7 @@ function buttonSound(){
       window.AudioContext ||
       window.webkitAudioContext;
 
-    if(!AudioContext){
-      return;
-    }
-
+    if(!AudioContext) return;
 
     if(!audioContext){
 
@@ -1369,16 +912,11 @@ function buttonSound(){
 
     }
 
-
-    if(
-      audioContext.state ===
-      "suspended"
-    ){
+    if(audioContext.state === "suspended"){
 
       audioContext.resume();
 
     }
-
 
     const oscillator =
       audioContext.createOscillator();
@@ -1386,59 +924,44 @@ function buttonSound(){
     const gain =
       audioContext.createGain();
 
-
-    oscillator.type =
-      "sine";
-
+    oscillator.type = "sine";
 
     oscillator.frequency.setValueAtTime(
       620,
       audioContext.currentTime
     );
 
-
     oscillator.frequency.exponentialRampToValueAtTime(
       400,
-      audioContext.currentTime + .035
+      audioContext.currentTime + 0.035
     );
 
-
     gain.gain.setValueAtTime(
-      .045,
+      0.045,
       audioContext.currentTime
     );
 
-
     gain.gain.exponentialRampToValueAtTime(
-      .001,
-      audioContext.currentTime + .055
+      0.001,
+      audioContext.currentTime + 0.055
     );
-
 
     oscillator.connect(gain);
-
-    gain.connect(
-      audioContext.destination
-    );
-
+    gain.connect(audioContext.destination);
 
     oscillator.start();
 
-
     oscillator.stop(
-      audioContext.currentTime + .06
+      audioContext.currentTime + 0.06
     );
-
 
   }catch(error){
 
-    /* Sound is optional.
-       Calculator continues working. */
+    /* Sound is optional */
 
   }
 
 }
-
 
 
 /* =====================================================
@@ -1449,21 +972,15 @@ function press(value){
 
   buttonSound();
 
-
   if(current === "Error"){
-
     current = "";
-
   }
 
-
   current += value;
-
 
   update();
 
 }
-
 
 
 /* =====================================================
@@ -1475,13 +992,11 @@ function clearAll(){
   buttonSound();
 
   current = "";
-
   expression.textContent = "";
 
   update();
 
 }
-
 
 
 /* =====================================================
@@ -1492,23 +1007,19 @@ function backspace(){
 
   buttonSound();
 
-
   if(current === "Error"){
 
     current = "";
 
   }else{
 
-    current =
-      current.slice(0,-1);
+    current = current.slice(0,-1);
 
   }
-
 
   update();
 
 }
-
 
 
 /* =====================================================
@@ -1519,36 +1030,23 @@ function percent(){
 
   buttonSound();
 
-
-  if(!current){
-    return;
-  }
-
+  if(!current) return;
 
   try{
 
-    const value =
-      Number(current);
-
+    const value = Number(current);
 
     if(!Number.isFinite(value)){
-
       throw new Error();
-
     }
 
-
-    current =
-      String(value / 100);
-
+    current = String(value / 100);
 
     update();
-
 
   }catch{
 
     current = "Error";
-
     update();
 
   }
@@ -1556,76 +1054,58 @@ function percent(){
 }
 
 
-
 /* =====================================================
-   END OPERATOR CLEANER
+   TOKENIZER FOR HUGE INTEGER MATH
    ===================================================== */
 
-function removeEndOperators(value){
-
-  return value
-    .trim()
-    .replace(/[+\-*/]+$/,"");
-
-}
-
-
-
-/* =====================================================
-   BIG INTEGER DETECTOR
-   ===================================================== */
-
-function isBigIntegerExpression(value){
-
-  return (
-    /^[0-9+\-*()\s]+$/.test(value)
-    &&
-    !value.includes(".")
-    &&
-    !value.includes("/")
-    &&
-    !value.includes("**")
-  );
-
-}
-
-
-
-/* =====================================================
-   BIG INTEGER CALCULATOR
-   ===================================================== */
-
-function calculateBigInteger(input){
+function tokenize(input){
 
   const tokens =
     input.match(
       /\d+|[()+\-*]/g
     );
 
-
   if(!tokens){
-
     throw new Error();
-
   }
 
+  return tokens;
+
+}
+
+
+/* =====================================================
+   BIG INTEGER PARSER
+   Supports:
+
+   +
+   -
+   *
+   parentheses
+   unary minus
+
+   Example:
+
+   999999999999999999999999
+   *
+   888888888888888888888888
+   ===================================================== */
+
+function calculateBigInteger(input){
+
+  const tokens = tokenize(input);
 
   let position = 0;
 
 
-
   function parseExpression(){
 
-    let result =
-      parseTerm();
-
+    let result = parseTerm();
 
     while(
-      position < tokens.length
-      &&
+      position < tokens.length &&
       (
-        tokens[position] === "+"
-        ||
+        tokens[position] === "+" ||
         tokens[position] === "-"
       )
     ){
@@ -1633,10 +1113,8 @@ function calculateBigInteger(input){
       const operator =
         tokens[position++];
 
-
       const right =
         parseTerm();
-
 
       if(operator === "+"){
 
@@ -1650,54 +1128,65 @@ function calculateBigInteger(input){
 
     }
 
-
     return result;
 
   }
 
 
-
   function parseTerm(){
 
-    let result =
-      parseFactor();
-
+    let result = parseFactor();
 
     while(
-      position < tokens.length
-      &&
+      position < tokens.length &&
       tokens[position] === "*"
     ){
 
       position++;
 
-
-      result *=
+      const right =
         parseFactor();
 
-    }
+      result *= right;
 
+    }
 
     return result;
 
   }
 
 
-
   function parseFactor(){
 
-    if(
-      position >=
-      tokens.length
-    ){
-
+    if(position >= tokens.length){
       throw new Error();
-
     }
 
 
     const token =
       tokens[position];
+
+
+    /* Unary minus */
+
+    if(token === "-"){
+
+      position++;
+
+      return -parseFactor();
+
+    }
+
+
+    /* Unary plus */
+
+    if(token === "+"){
+
+      position++;
+
+      return parseFactor();
+
+    }
 
 
     /* Parentheses */
@@ -1706,28 +1195,212 @@ function calculateBigInteger(input){
 
       position++;
 
-
       const result =
         parseExpression();
 
-
-      if(
-        tokens[position] !== ")"
-      ){
-
+      if(tokens[position] !== ")"){
         throw new Error();
-
       }
 
-
       position++;
-
 
       return result;
 
     }
 
 
-    /* Negative */
+    /* Number */
 
-    i
+    if(/^\d+$/.test(token)){
+
+      position++;
+
+      return BigInt(token);
+
+    }
+
+
+    throw new Error();
+
+  }
+
+
+  const result =
+    parseExpression();
+
+
+  if(position !== tokens.length){
+    throw new Error();
+  }
+
+
+  return result;
+
+}
+
+
+/* =====================================================
+   BIG INTEGER CHECK
+   ===================================================== */
+
+function isBigIntegerExpression(value){
+
+  return (
+    /^[0-9+\-*()\s]+$/.test(value) &&
+    !value.includes("**")
+  );
+
+}
+
+
+/* =====================================================
+   NORMAL CALCULATION
+   ===================================================== */
+
+function calculateNormal(input){
+
+  /*
+    JavaScript calculation is used only
+    for decimal / division / power calculations.
+  */
+
+  const safe =
+    input.replace(
+      /[^0-9+\-*/().]/g,
+      ""
+    );
+
+  if(!safe){
+    throw new Error();
+  }
+
+  const result =
+    Function(
+      '"use strict"; return (' +
+      safe +
+      ')'
+    )();
+
+
+  if(
+    typeof result !== "number" ||
+    !Number.isFinite(result)
+  ){
+
+    throw new Error();
+
+  }
+
+
+  return String(
+    Number(
+      result.toFixed(12)
+    )
+  );
+
+}
+
+
+/* =====================================================
+   CALCULATE
+   ===================================================== */
+
+function calculate(){
+
+  buttonSound();
+
+  if(!current) return;
+
+  try{
+
+    const old =
+      current.trim();
+
+
+    /*
+      HUGE INTEGER MODE
+
+      If expression contains only:
+      numbers + - * ( )
+
+      BigInt parser handles it.
+    */
+
+    if(
+      isBigIntegerExpression(old)
+    ){
+
+      const result =
+        calculateBigInteger(old);
+
+      current =
+        result.toString();
+
+      expression.textContent =
+        visibleExpression(old) + " =";
+
+      update();
+
+      addHistory(
+        visibleExpression(old),
+        current
+      );
+
+      return;
+
+    }
+
+
+    /*
+      NORMAL MODE
+    */
+
+    const result =
+      calculateNormal(old);
+
+    current = result;
+
+    expression.textContent =
+      visibleExpression(old) + " =";
+
+    update();
+
+    addHistory(
+      visibleExpression(old),
+      current
+    );
+
+
+  }catch(error){
+
+    current = "Error";
+
+    expression.textContent = "";
+
+    update();
+
+  }
+
+}
+
+
+/* =====================================================
+   VISIBLE MATHEMATICAL SYMBOLS
+   ===================================================== */
+
+function visibleExpression(value){
+
+  return String(value)
+    .replace(/\*/g,"×")
+    .replace(/\//g,"÷");
+
+}
+
+
+/* =====================================================
+   HISTORY
+   ===================================================== */
+
+function addHistory(a,b){
+
+  const 
